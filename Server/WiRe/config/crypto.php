@@ -8,4 +8,4 @@
 
 $header_salt = "FRESHLY SMOKED Kosher salted ";
 $more_salt = "*special *S*A*L*T* for password*";
-$end_salt = " sprinkled with more salts and a little of the best indonesian tiny black peppers to suit your taste and protect you from evildoers";
+$end_salt = " sprinkled with more salts and a little of the best Indonesian tiny black peppers to suit your taste and protect you from evildoers";
