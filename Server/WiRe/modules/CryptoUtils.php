@@ -43,16 +43,6 @@ class AES_128_ECB
         $result = substr($str, 0, strlen($str) - $pad);
         return $result;
     }
-
-    protected function hex2bin($hexdata) {
-      $bindata = '';
-
-      for ($i = 0; $i < strlen($hexdata); $i += 2) {
-            $bindata .= chr(hexdec(substr($hexdata, $i, 2)));
-      }
-
-      return $bindata;
-    }
 } 
 
 class AES_128_CBC
@@ -105,16 +95,6 @@ class AES_128_CBC
         mcrypt_module_close($td);
 
         return utf8_encode(trim($decrypted));
-    }
-
-    protected function hex2bin($hexdata) {
-      $bindata = '';
-
-      for ($i = 0; $i < strlen($hexdata); $i += 2) {
-            $bindata .= chr(hexdec(substr($hexdata, $i, 2)));
-      }
-
-      return $bindata;
     }
 }
     
