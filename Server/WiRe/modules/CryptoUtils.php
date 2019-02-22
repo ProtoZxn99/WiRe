@@ -15,7 +15,7 @@ function XOR_Encrypt($toEncrypt, $key) {
     return $output;
 }
 
-class AES_ECB
+class AES_128_ECB
 {
     private $key;
     
@@ -55,7 +55,7 @@ class AES_ECB
     }
 } 
 
-class AES_CBC
+class AES_128_CBC
     {
     
 //        HOW TO USE IT (PHP)
