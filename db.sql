@@ -34,6 +34,7 @@ CREATE TABLE `account` (
   `account_wifi_password` varchar(63) DEFAULT NULL,
   `account_key` varchar(16) NOT NULL,
   `account_email` varchar(100) NOT NULL,
+  `account_time` datetime NOT NULL,
   PRIMARY KEY (`account_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
@@ -42,9 +43,9 @@ CREATE TABLE `account` (
 --
 
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` (`account_id`,`account_password`,`account_block`,`account_wifi_ssid`,`account_wifi_password`,`account_key`,`account_email`) VALUES 
- (1,'3ae7f4ab84f659fc2f0703382c20db279976ff82c2f540078003c07778cc0053',0,'c','s','',''),
- (2,'a',0,'cd4687','ABCabc123ZXCzxc','','');
+INSERT INTO `account` (`account_id`,`account_password`,`account_block`,`account_wifi_ssid`,`account_wifi_password`,`account_key`,`account_email`,`account_time`) VALUES 
+ (1,'3ae7f4ab84f659fc2f0703382c20db279976ff82c2f540078003c07778cc0053',0,'c','ABCabc123ZXCzxc','','','0000-00-00 00:00:00'),
+ (2,'a',0,'E3P7atrick is a very good name','12345678901234567890123456789012345678901234567890A','','','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 
 
@@ -114,20 +115,20 @@ CREATE TABLE `device` (
 
 /*!40000 ALTER TABLE `device` DISABLE KEYS */;
 INSERT INTO `device` (`device_id`,`device_state`,`device_name`,`account_id`) VALUES 
- ('CC:50:E3:C7:64:3C-0',0,'',NULL),
- ('CC:50:E3:C7:64:3C-5',0,'',NULL),
- ('DC:4F:22:4C:74:50-0',0,'',NULL),
- ('DC:4F:22:4C:74:50-12',0,'',NULL),
- ('DC:4F:22:4C:74:50-13',0,'',NULL),
- ('DC:4F:22:4C:74:50-14',0,'',NULL),
- ('DC:4F:22:4C:74:50-15',0,'',NULL),
- ('DC:4F:22:4C:74:50-16',0,'',NULL),
- ('DC:4F:22:4C:74:50-2',0,'',NULL),
- ('DC:4F:22:4C:74:50-4',0,'',NULL),
- ('DC:4F:22:4C:74:50-5',0,'',NULL),
- ('IDDEVICE',0,'NAMADEVICE',NULL),
- ('IDDEVICE2',0,'NAMADEVICE',NULL),
- ('IDDEVICE3',0,'NAMADEVICE',NULL);
+ ('CC:50:E3:C7:64:3C-0',0,'',2),
+ ('CC:50:E3:C7:64:3C-5',0,'',2),
+ ('DC:4F:22:4C:74:50-0',0,'',2),
+ ('DC:4F:22:4C:74:50-12',0,'',2),
+ ('DC:4F:22:4C:74:50-13',0,'',2),
+ ('DC:4F:22:4C:74:50-14',0,'',2),
+ ('DC:4F:22:4C:74:50-15',0,'',2),
+ ('DC:4F:22:4C:74:50-16',0,'',2),
+ ('DC:4F:22:4C:74:50-2',0,'',2),
+ ('DC:4F:22:4C:74:50-4',0,'',2),
+ ('DC:4F:22:4C:74:50-5',0,'',2),
+ ('IDDEVICE',0,'NAMADEVICE',2),
+ ('IDDEVICE2',0,'NAMADEVICE',2),
+ ('IDDEVICE3',0,'NAMADEVICE',2);
 /*!40000 ALTER TABLE `device` ENABLE KEYS */;
 
 
@@ -224,6 +225,7 @@ INSERT INTO `timer` (`timer_id`,`timer_start`,`timer_state`,`timer_d0`,`timer_d1
 DROP TABLE IF EXISTS `traffic`;
 CREATE TABLE `traffic` (
   `traffic_ip` varchar(15) NOT NULL DEFAULT '',
+  `account_id` int(10) unsigned DEFAULT NULL,
   `traffic_block` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`traffic_ip`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -233,8 +235,9 @@ CREATE TABLE `traffic` (
 --
 
 /*!40000 ALTER TABLE `traffic` DISABLE KEYS */;
-INSERT INTO `traffic` (`traffic_ip`,`traffic_block`) VALUES 
- ('....',0);
+INSERT INTO `traffic` (`traffic_ip`,`account_id`,`traffic_block`) VALUES 
+ ('\0ûºéUŽºý!)B…«Ç',1,0),
+ ('....',0,0);
 /*!40000 ALTER TABLE `traffic` ENABLE KEYS */;
 
 

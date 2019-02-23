@@ -77,11 +77,16 @@ String HTTPGetRequest(String url){
 }
 
 String XOR_Encrypt(String toEncrypt, String key) {
-    int input_len = toEncrypt.length();
     String output = toEncrypt;
     int key_len = key.length();
-    for (int i = 0; i < input_len; i++){
-        output[i] = toEncrypt[i] ^ key[i % key_len];
+    for (int i = 0; i < toEncrypt.length(); i++){
+        int key_index = i % key_len;
+        if(key[key_index]==toEncrypt[i]){
+          output[i] = toEncrypt[i];
+        }
+        else{
+          output[i] = toEncrypt[i] ^ key[key_index];
+        }
     }
     return output;
 }

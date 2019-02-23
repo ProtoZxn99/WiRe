@@ -23,7 +23,7 @@ include '_footer.php';
 function generateSSIDKey($mac){
     $key = "0";
     if(!is_null($mac) && strlen($mac)>16){
-        $seed = $mac[15];
+        $seed = $mac{15};
         $key = "";
         if(!is_numeric($seed)){
             $seed = 0;

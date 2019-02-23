@@ -9,9 +9,16 @@
 function XOR_Encrypt($toEncrypt, $key) {
 
     $output = '';
-	for ($i = 0; $i < strlen($toEncrypt); $i++) {
-		$output .= $toEncrypt{$i} ^ $key{$i%strlen($key)};
-	}
+    $key_len = strlen($key);
+    for ($i = 0; $i < strlen($toEncrypt); $i++) {
+        $key_index = $i%$key_len;
+        if($toEncrypt{$i}==$key{$key_index}){
+            $output .= $toEncrypt{$i};
+        }
+        else{
+            $output .= $toEncrypt{$i} ^ $key{$key_index};
+        }
+    }
     return $output;
 }
 
