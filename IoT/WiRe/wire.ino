@@ -9,9 +9,9 @@
 
 // Replace these with your WiFi network settings
 static String ssid = "Poi"; //replace this with your WiFi network name
-static String password = "1sampai8"; //replace this with your WiFi network password
+static String password = "sayatidakyakin"; //replace this with your WiFi network password
 
-static const String server_url = "http://192.168.43.235/wire/server/wire/";
+static const String server_url = "http://192.168.43.35/wire/server/wire/";
 
 static uint8_t listpin [] = {D1,D2,D3,D4,D5,D6,D7,D8};
 
@@ -83,7 +83,7 @@ String Base64_Decode(String encoded){
 }
 
 void UpdateWiFiInfo(){
-  ssid = HTTPGetRequest(server_url+"getAccountWiFiSSID.php?device_id="+WiFi.macAddress()+"-"+listpin[0]);\
+  ssid = HTTPGetRequest(server_url+"geDeviceWiFiSSID.php?device_id="+WiFi.macAddress()+"-"+listpin[0]);\
   Serial.print("Received: ");
   Serial.println(ssid);
   ssid = Base64_Decode(ssid);
@@ -92,7 +92,7 @@ void UpdateWiFiInfo(){
   ssid = XOR_Encrypt(ssid, WiFi.macAddress());
   Serial.print("Decrypted: ");
   Serial.println(ssid);
-  password = HTTPGetRequest(server_url+"getAccountWiFiPassword.php?device_id="+WiFi.macAddress()+"-"+listpin[0]);
+  password = HTTPGetRequest(server_url+"getDeviceWiFiPassword.php?device_id="+WiFi.macAddress()+"-"+listpin[0]);
   Serial.print("Received: ");
   Serial.println(password);
   password = Base64_Decode(password);

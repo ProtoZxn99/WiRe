@@ -7,6 +7,6 @@
  */
 
 include "config/conn.php";
-include "config/error.php";
+include "config/errors.php";
 include "config/traffic.php";
 include "config/crypto.php";
