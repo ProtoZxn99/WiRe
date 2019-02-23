@@ -22,11 +22,11 @@ if(checkEmailFormat($account_email)){
         echo 1;
     }
     else{
-        echo $error['email_not_unique'];
+        echo $GLOBALS['error']['email_not_unique'];
     }
 }
 else{
-    echo $error['wrong_format'];
+    echo $GLOBALS['error']['wrong_format'];
 }
 
 include '_footer.php';

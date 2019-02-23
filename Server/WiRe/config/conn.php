@@ -1,4 +1,8 @@
 <?php
+include "config/traffic.php";
+//$ip = getIP();
+//checkIP($ip);
+
 $ip_wire = "127.0.0.1";
 $conn = mysqli_connect("localhost", "root", "", "wire");
 
@@ -8,12 +12,13 @@ function ValidateUser($id, $pass){
 
     if(!is_null($exec['authority'])){
         if($exec['authority']>0){
-            echo $error["id_block"];
+            echo $GLOBALS['error']["id_block"];
             die();
         }
     }
     else{
-        echo $error['wrong_format'];
+        echo $GLOBALS['error']['wrong_format'];
         die();
     }
+//    scheckAccount($ip, $id);
 }

@@ -8,26 +8,31 @@
 #include "Base64.h"
 
 // Replace these with your WiFi network settings
-static String ssid = "Poi"; //replace this with your WiFi network name
-static String password = "sayatidakyakin"; //replace this with your WiFi network password
+static String ssid = "cd4687"; //replace this with your WiFi network name
+static String password = "278019560"; //replace this with your WiFi network password
 
-static const String server_url = "http://192.168.43.35/wire/server/wire/";
+static const String server_url = "http://192.168.0.17/wire/server/wire/";
+
+static const String server_key = "concealmactohackers";
+static String encrypted_id;
+static String ssid_key;
 
 static uint8_t listpin [] = {D1,D2,D3,D4,D5,D6,D7,D8};
 
 static const int device_cooldown = 1000; //cooldown of each device cycle in milliseconds
+static const int cycle_timeout = 10;
 
 static const int wifi_cooldown = 1000; //cooldown of each wifi cycle check in milliseconds
 static const int wifi_timeout = 10; //number of max loops of wifi check allowed before WiFi deemed unreachable
+static const int wifi_update_cycle = 1;
+
+static int device_cycle = 0;
 
 void setup()
 {
-  
   Serial.begin(115200);
-  String a = XOR_Encrypt("278019560",WiFi.macAddress());
-  Serial.println(a);
-  String b = XOR_Encrypt(a,WiFi.macAddress());
-  Serial.println(b);
+  generateSSIDKey();
+  generateEncryptedID();
   pinMode(D0,OUTPUT);
   digitalWrite(D0,HIGH);
   for(int i = 0; i<sizeof(listpin); i++){
@@ -35,6 +40,19 @@ void setup()
     digitalWrite(listpin[i],LOW);
   }
   digitalWrite(D0,LOW);
+}
+
+void generateSSIDKey(){
+  int seed = String(WiFi.macAddress()[15]).toInt();
+  ssid_key = String(WiFi.macAddress()).substring(seed+2)+WiFi.macAddress();
+  ssid_key.replace(":", "");
+  Serial.println(ssid_key);
+}
+
+void generateEncryptedID(){
+  String id = WiFi.macAddress()+"-"+listpin[0];
+  encrypted_id = Base64_Encode(XOR_Encrypt(id,server_key));
+  Serial.println(encrypted_id);
 }
 
 String HTTPGetRequest(String url){
@@ -46,7 +64,7 @@ String HTTPGetRequest(String url){
     HTTPClient http;  //Declare an object of class HTTPClient
 
     http.begin(url);  //Specify request destination
-    int httpCode = http.GET();                                                                  //Send the request
+    int httpCode = http.GET();//Send the request
  
     if (httpCode > 0) { //Check the returning code
  
@@ -59,47 +77,48 @@ String HTTPGetRequest(String url){
 }
 
 String XOR_Encrypt(String toEncrypt, String key) {
-  
+    int input_len = toEncrypt.length();
     String output = toEncrypt;
-    
-    for (int i = 0; i < toEncrypt.length(); i++){
-        output[i] = toEncrypt[i] ^ key[i % (sizeof(key) / sizeof(char))];
+    int key_len = key.length();
+    for (int i = 0; i < input_len; i++){
+        output[i] = toEncrypt[i] ^ key[i % key_len];
     }
     return output;
 }
 
-String Base64_Decode(String encoded){
-
-  char input [encoded.length()];
-  encoded.toCharArray(input,encoded.length());
-  int inputLen = sizeof(input);
+String Base64_Encode(String plain){
+  char* input = const_cast<char*>(plain.c_str());
+  int inputLen = strlen(input);
+  int encodedLen = base64_enc_len(inputLen);
+  char encoded[encodedLen+1];
+  base64_encode(encoded, input, inputLen); 
   
+  return encoded;
+}
+
+String Base64_Decode (String encoded){
+  int inputLen = encoded.length()+1;
+  char input [inputLen];
+  encoded.toCharArray(input,inputLen);
   int decodedLen = base64_dec_len(input, inputLen);
   char decoded[decodedLen];
-  
   base64_decode(decoded, input, inputLen);
   
   return String(decoded);
 }
 
 void UpdateWiFiInfo(){
-  ssid = HTTPGetRequest(server_url+"geDeviceWiFiSSID.php?device_id="+WiFi.macAddress()+"-"+listpin[0]);\
-  Serial.print("Received: ");
+  ssid = HTTPGetRequest(server_url+"getDeviceWiFiSSID.php?device_id="+encrypted_id);
+  Serial.print("Received SSID: ");
   Serial.println(ssid);
-  ssid = Base64_Decode(ssid);
-  Serial.print("Decoded: ");
+  ssid = XOR_Encrypt(Base64_Decode(ssid), ssid_key);
+  Serial.print("Decrypted SSID: ");
   Serial.println(ssid);
-  ssid = XOR_Encrypt(ssid, WiFi.macAddress());
-  Serial.print("Decrypted: ");
-  Serial.println(ssid);
-  password = HTTPGetRequest(server_url+"getDeviceWiFiPassword.php?device_id="+WiFi.macAddress()+"-"+listpin[0]);
-  Serial.print("Received: ");
+  password = HTTPGetRequest(server_url+"getDeviceWiFiPassword.php?device_id="+encrypted_id);
+  Serial.print("Received Password: ");
   Serial.println(password);
-  password = Base64_Decode(password);
-  Serial.print("Decoded: ");
-  Serial.println(password);
-  password = XOR_Encrypt(password, ssid);
-  Serial.print("Decrypted: ");
+  password = XOR_Encrypt(Base64_Decode(password), ssid);
+  Serial.print("Decrypted Password: ");
   Serial.println(password);
 }
 
@@ -107,7 +126,7 @@ void SearchUnsecuredWiFi(){
   int n = WiFi.scanNetworks();
   
   int i = 0;
-   while (i < n && WiFi.status() != WL_CONNECTED) {
+   while (i < n) {
       // Print SSID and RSSI for each network found
       WiFi.begin(WiFi.SSID(i));
       
@@ -141,25 +160,30 @@ void connectWiFi(){
 }
 
 void loop() {
+  int cyclecounter = cycle_timeout;
   if(WiFi.status() != WL_CONNECTED){
     digitalWrite(D0,HIGH);
     connectWiFi();
   }
-  Serial.println(WiFi.macAddress());
-  while(WiFi.status() != WL_CONNECTED){
+  while(WiFi.status() != WL_CONNECTED && cyclecounter>0){
     SearchUnsecuredWiFi();
+    cyclecounter--;
   }
-  UpdateWiFiInfo();
-  digitalWrite(D0,LOW);
-  for(int i = 0; i<sizeof(listpin); i++){
-    String state = HTTPGetRequest(server_url+"getDeviceState.php?device_id="+WiFi.macAddress()+"-"+listpin[i]);
-    if(state=="1"){
-      digitalWrite(listpin[i],HIGH);
+  if(WiFi.status() == WL_CONNECTED){
+    device_cycle = (device_cycle++)%wifi_update_cycle;
+    if(device_cycle==0){
+      UpdateWiFiInfo();
     }
-    else{
-      digitalWrite(listpin[i],LOW);
+    digitalWrite(D0,LOW);
+    for(int i = 0; i<sizeof(listpin); i++){
+      String state = HTTPGetRequest(server_url+"getDeviceState.php?device_id="+WiFi.macAddress()+"-"+listpin[i]);
+      if(state=="1"){
+        digitalWrite(listpin[i],HIGH);
+      }
+      else{
+        digitalWrite(listpin[i],LOW);
+      }
     }
   }
-  
   delay(device_cooldown);
 }

@@ -23,7 +23,7 @@ if($exec['users']>0){
     echo 1;
 }
 else{
-    echo $error['email_fail'];
+    echo $GLOBALS['error']['email_fail'];
 }
 
 include '_footer.php';
