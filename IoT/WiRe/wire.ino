@@ -198,7 +198,8 @@ void loop() {
     }
     digitalWrite(D0,LOW);
     for(int i = 0; i<sizeof(listpin); i++){
-      String state = HTTPGetRequest(server_url+"getDeviceState.php?device_id="+WiFi.macAddress()+"-"+listpin[i]);
+      String state = HTTPGetRequest(server_url+"getDeviceState.php?device_id="+encrypted_id+"&&device_pin="+listpin[i]);
+      Serial.println(state);
       if(state=="1"){
         digitalWrite(listpin[i],HIGH);
       }
