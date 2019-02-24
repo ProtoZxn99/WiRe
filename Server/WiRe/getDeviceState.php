@@ -20,8 +20,8 @@ $query = mysqli_query($conn, "SELECT device_state as state FROM device where dev
 $exec = mysqli_fetch_array($query);
 
 if(!is_null($exec['state'])){
-    $state = $exec['state'];
-    $state = base64_encode(XOR_Encrypt(MD5_HMAC($state, $device_id, $device_id).$state,$device_id));
+    $state = $exec['state']. RandomString(5);
+    $state = base64_encode(XOR_Encrypt(MD5_HMAC($state, $xor_mac_key, $device_id).$state,$device_id));
     echo $state;
 }
 else{

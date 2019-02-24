@@ -203,8 +203,8 @@ void loop() {
       if(state.length()>1){
         state = XOR_Encrypt(Base64_Decode(state), WiFi.macAddress());
         String new_hmac = state.substring(0,32);
-        state = state.substring(32,33);
-        String check_hmac = MD5_HMAC(state,WiFi.macAddress(),WiFi.macAddress());
+        state = state.substring(32);
+        String check_hmac = MD5_HMAC(state,server_key,WiFi.macAddress());
         if(new_hmac==check_hmac){
           state = state.substring(0,1);
           if(state=="1"){
