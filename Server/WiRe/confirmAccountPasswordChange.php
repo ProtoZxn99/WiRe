@@ -19,7 +19,6 @@ while($exec = mysqli_fetch_array($query)){
         echo "Your password has successfully been changed";
         
         include 'config/footer.php';
-        die();
     }
 }
 

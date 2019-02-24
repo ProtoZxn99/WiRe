@@ -13,12 +13,12 @@ function ValidateUser($id, $pass){
     if(!is_null($exec['authority'])){
         if($exec['authority']>0){
             echo $GLOBALS['error']["id_block"];
-            die();
+            include '_footer.php';
         }
     }
     else{
         echo $GLOBALS['error']['wrong_format'];
-        die();
+        include '_footer.php';
     }
 //    scheckAccount($ip, $id);
 }

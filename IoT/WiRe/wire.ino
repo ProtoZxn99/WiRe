@@ -50,8 +50,9 @@ void generateSSIDKey(){
 }
 
 void generateEncryptedID(){
-  String id = WiFi.macAddress()+"-"+listpin[0];
-  encrypted_id = Base64_Encode(XOR_Encrypt(id,server_key));
+  String id = WiFi.macAddress();
+  String hmac_id = MD5_HMAC(WiFi.macAddress(),server_key,server_key);
+  encrypted_id = Base64_Encode(XOR_Encrypt(hmac_id+id,server_key));
 }
 
 String HTTPGetRequest(String url){
@@ -199,12 +200,20 @@ void loop() {
     digitalWrite(D0,LOW);
     for(int i = 0; i<sizeof(listpin); i++){
       String state = HTTPGetRequest(server_url+"getDeviceState.php?device_id="+encrypted_id+"&&device_pin="+listpin[i]);
-      Serial.println(state);
-      if(state=="1"){
-        digitalWrite(listpin[i],HIGH);
-      }
-      else{
-        digitalWrite(listpin[i],LOW);
+      if(state.length()>1){
+        state = XOR_Encrypt(Base64_Decode(state), WiFi.macAddress());
+        String new_hmac = state.substring(0,32);
+        state = state.substring(32,33);
+        String check_hmac = MD5_HMAC(state,WiFi.macAddress(),WiFi.macAddress());
+        if(new_hmac==check_hmac){
+          state = state.substring(0,1);
+          if(state=="1"){
+            digitalWrite(listpin[i],HIGH);
+          }
+          else if(state=="0"){
+            digitalWrite(listpin[i],LOW);
+          }
+        }
       }
     }
   }

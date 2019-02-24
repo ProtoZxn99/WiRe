@@ -47,7 +47,7 @@ function checkIP($ip){
     $count = mysqli_fetch_array($query3);
     if($count['traffic']>$GLOBALS['traffic']['limit']){
         echo $GLOBALS['error']['traffic_busy'];
-        die();
+        include '_footer.php';
     }
 }
 
@@ -57,7 +57,7 @@ function checkAccount($ip, $id){
     if($count['traffic']>$GLOBALS['traffic']['limit']*$GLOBALS['traffic']['max']){
         $query2 = mysqli_query($conn, "update account set account_block = 1 where account_id = ".$id.";");
         echo $GLOBALS['error']['traffic_busy'];
-        die();
+        include '_footer.php';
     }
     $query4 = mysqli_query($conn, "update traffic set account_id = ".$id." where traffic_ip = '".$ip."';");
 }
