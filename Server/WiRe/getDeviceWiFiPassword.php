@@ -13,7 +13,7 @@ $device_id = mysqli_real_escape_string($conn, XOR_Encrypt(base64_decode($_GET['d
 $query = mysqli_query($conn, "select a.account_wifi_ssid as ssid, a.account_wifi_password as password from account a, device d where a.account_id = d.account_id and d.device_id = '".$device_id."' limit 1;");
 $exec = mysqli_fetch_array($query);
 
-$password = base64_encode(XOR_Encrypt($exec['password'], $exec['ssid']));
+$password = base64_encode(XOR_Encrypt(MD5_HMAC($exec['password'], $xor_mac_key, $exec['ssid']).$exec['password'], $exec['ssid']));
 
 echo $password;
 

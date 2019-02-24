@@ -15,7 +15,7 @@ $exec = mysqli_fetch_array($query);
 
 $mac = substr($device_id, 0, strpos($device_id, '-'));
 $ssid_key = generateSSIDKey($mac);
-$ssid = base64_encode(XOR_Encrypt($exec['ssid'], $ssid_key));
+$ssid = base64_encode(XOR_Encrypt(MD5_HMAC($exec['ssid'], $xor_mac_key, $ssid_key).$exec['ssid'], $ssid_key));
 echo $ssid;
 
 include '_footer.php';

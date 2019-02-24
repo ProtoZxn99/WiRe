@@ -22,6 +22,11 @@ function XOR_Encrypt($toEncrypt, $key) {
     return $output;
 }
 
+
+function MD5_HMAC($text, $key1, $key2){
+    return MD5($key2.MD5($key1.$text));
+}
+
 class AES_128_ECB
 {
     private $key;

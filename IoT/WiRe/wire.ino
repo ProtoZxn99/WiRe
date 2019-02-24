@@ -6,6 +6,7 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 #include "Base64.h"
+#include <MD5.h>
 
 // Replace these with your WiFi network settings
 static String ssid = "cd4687"; //replace this with your WiFi network name
@@ -13,7 +14,7 @@ static String password = "278019560"; //replace this with your WiFi network pass
 
 static const String server_url = "http://192.168.0.17/wire/server/wire/";
 
-static const String server_key = "concealmactohackers";
+static const String server_key = "ConcealM4CtoHackers";
 static String encrypted_id;
 static String ssid_key;
 
@@ -46,13 +47,11 @@ void generateSSIDKey(){
   int seed = String(WiFi.macAddress()[15]).toInt();
   ssid_key = String(WiFi.macAddress()).substring(seed+2)+WiFi.macAddress();
   ssid_key.replace(":", "");
-  Serial.println(ssid_key);
 }
 
 void generateEncryptedID(){
   String id = WiFi.macAddress()+"-"+listpin[0];
   encrypted_id = Base64_Encode(XOR_Encrypt(id,server_key));
-  Serial.println(encrypted_id);
 }
 
 String HTTPGetRequest(String url){
@@ -74,6 +73,20 @@ String HTTPGetRequest(String url){
   }
   
   return payload;
+}
+
+String MD5_HMAC(String input, String key1, String key2){
+  String hash_1 = MD5_Hash(key1+input);
+  String hash_2 = MD5_Hash(key2+hash_1);
+  return hash_2;
+}
+
+String MD5_Hash(String input){
+  MD5Builder md5;
+  md5.begin();
+  md5.add(input);
+  md5.calculate();
+  return md5.toString();
 }
 
 String XOR_Encrypt(String toEncrypt, String key) {
@@ -113,18 +126,22 @@ String Base64_Decode (String encoded){
 }
 
 void UpdateWiFiInfo(){
-  ssid = HTTPGetRequest(server_url+"getDeviceWiFiSSID.php?device_id="+encrypted_id);
-  Serial.print("Received SSID: ");
-  Serial.println(ssid);
-  ssid = XOR_Encrypt(Base64_Decode(ssid), ssid_key);
-  Serial.print("Decrypted SSID: ");
-  Serial.println(ssid);
-  password = HTTPGetRequest(server_url+"getDeviceWiFiPassword.php?device_id="+encrypted_id);
-  Serial.print("Received Password: ");
-  Serial.println(password);
-  password = XOR_Encrypt(Base64_Decode(password), ssid);
-  Serial.print("Decrypted Password: ");
-  Serial.println(password);
+  String new_ssid = HTTPGetRequest(server_url+"getDeviceWiFiSSID.php?device_id="+encrypted_id);
+  new_ssid = XOR_Encrypt(Base64_Decode(new_ssid), ssid_key);
+  String new_hmac = new_ssid.substring(0,32);
+  new_ssid = new_ssid.substring(32);
+  String check_hmac = MD5_HMAC(new_ssid,server_key,ssid_key);
+  if(new_hmac==check_hmac){
+    String new_password = HTTPGetRequest(server_url+"getDeviceWiFiPassword.php?device_id="+encrypted_id);
+    new_password = XOR_Encrypt(Base64_Decode(new_password), new_ssid);
+    new_hmac = new_password.substring(0,32);
+    new_password = new_password.substring(32);
+    check_hmac = MD5_HMAC(new_password,server_key,new_ssid);
+    if(new_hmac==check_hmac){
+      ssid = new_ssid;
+      password = new_password;
+    }
+  }
 }
 
 void SearchUnsecuredWiFi(){
