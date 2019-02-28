@@ -10,7 +10,7 @@ $exec = mysqli_fetch_array($query);
 
 if(!is_null($exec['authority'])){
     if($exec['authority']<1){
-        $query = mysqli_query($conn, "update set account_key = '".$account_key."' where account_id = '".$exec['id']."'");
+        //$query = mysqli_query($conn, "update set account_key = '".$account_key."' where account_id = '".$exec['id']."'");
         echo $exec['id'];
     }
     else{

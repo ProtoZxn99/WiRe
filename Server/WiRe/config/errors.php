@@ -16,3 +16,4 @@ $GLOBALS['error']["registration_fail"] = "06: Failed to register information.";
 $GLOBALS['error']["email_not_unique"] = "07: Email information has already been registered, please use a different email.";
 $GLOBALS['error']["wrong_format"] = "08: Please check your email input";
 $GLOBALS['error']["email_fail"] = "09: Email not found";
+$GLOBALS['error']["group_duplicate"] = "10: Group already existed";

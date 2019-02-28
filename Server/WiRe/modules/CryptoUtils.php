@@ -5,6 +5,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+function RandomString($length)
+{
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $randstring = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randstring .= $characters{rand(0, strlen($characters)-1)};
+    }
+    return $randstring;
+}
 
 function XOR_Encrypt($toEncrypt, $key) {
 
