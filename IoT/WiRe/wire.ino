@@ -199,7 +199,7 @@ void loop() {
     }
     digitalWrite(D0,LOW);
     for(int i = 0; i<sizeof(listpin); i++){
-      String state = HTTPGetRequest(server_url+"getDeviceState.php?device_id="+encrypted_id+"&&device_pin="+listpin[i]);
+      String state = HTTPGetRequest(server_url+"getDeviceState.php?device_id="+encrypted_id+"&device_pin="+listpin[i]);
       if(state.length()>1){
         state = XOR_Encrypt(Base64_Decode(state), WiFi.macAddress());
         String new_hmac = state.substring(0,32);
