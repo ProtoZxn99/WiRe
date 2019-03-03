@@ -7,7 +7,7 @@
  */
 
 $header_salt = "FRESHLY SMOKED Kosher salted ";
-$more_salt = "*special *S*A*L*T* for passwords*";
+$more_salt = "*S*A*L*T*";
 $end_salt = " sprinkled with more salts and a little of the best Indonesian tiny black peppers to suit your taste and protect you from evildoers";
 
 $xor_mac_key = "ConcealM4CtoHackers";
