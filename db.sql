@@ -202,6 +202,7 @@ CREATE TABLE `timer` (
   `timer_d6` tinyint(1) DEFAULT NULL,
   `grouping_id` int(10) unsigned NOT NULL DEFAULT '0',
   `timer_name` varchar(45) NOT NULL DEFAULT '',
+  `timer_action` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`timer_id`),
   KEY `FK_timer_1` (`grouping_id`) USING BTREE,
   CONSTRAINT `FK_timer_1` FOREIGN KEY (`grouping_id`) REFERENCES `grouping` (`grouping_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -212,10 +213,10 @@ CREATE TABLE `timer` (
 --
 
 /*!40000 ALTER TABLE `timer` DISABLE KEYS */;
-INSERT INTO `timer` (`timer_id`,`timer_start`,`timer_state`,`timer_d0`,`timer_d1`,`timer_d2`,`timer_d3`,`timer_d4`,`timer_d5`,`timer_d6`,`grouping_id`,`timer_name`) VALUES 
- (1,'22:32:00',1,1,0,0,0,0,0,0,1,'ta'),
- (2,'22:32:00',1,1,0,0,0,0,0,0,1,'ta'),
- (3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'tb');
+INSERT INTO `timer` (`timer_id`,`timer_start`,`timer_state`,`timer_d0`,`timer_d1`,`timer_d2`,`timer_d3`,`timer_d4`,`timer_d5`,`timer_d6`,`grouping_id`,`timer_name`,`timer_action`) VALUES 
+ (1,'22:32:00',1,1,0,0,0,0,0,0,1,'ta',0),
+ (2,'22:32:00',1,1,0,0,0,0,0,0,1,'ta',0),
+ (3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'tb',0);
 /*!40000 ALTER TABLE `timer` ENABLE KEYS */;
 
 
