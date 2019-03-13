@@ -21,5 +21,6 @@ while($exec = mysqli_fetch_array($query)){
         include 'config/footer.php';
     }
 }
+echo $GLOBALS['error']["email_fail"];
 
 include '_footer.php';

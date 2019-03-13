@@ -1,7 +1,7 @@
 -- MySQL Administrator dump 1.4
 --
 -- ------------------------------------------------------
--- Server version	5.5.5-10.1.25-MariaDB
+-- Server version	5.5.5-10.0.17-MariaDB
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -35,6 +35,7 @@ CREATE TABLE `account` (
   `account_key` varchar(16) NOT NULL,
   `account_email` varchar(100) NOT NULL,
   `account_time` datetime NOT NULL,
+  `account_use` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`account_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
@@ -43,9 +44,9 @@ CREATE TABLE `account` (
 --
 
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` (`account_id`,`account_password`,`account_block`,`account_wifi_ssid`,`account_wifi_password`,`account_key`,`account_email`,`account_time`) VALUES 
- (1,'3ae7f4ab84f659fc2f0703382c20db279976ff82c2f540078003c07778cc0053',0,'c','ABCabc123ZXCzxc','','','0000-00-00 00:00:00'),
- (2,'a',0,'E3P7atrick is a very good name','12345678901234567890123456789012345678901234567890A','','','0000-00-00 00:00:00');
+INSERT INTO `account` (`account_id`,`account_password`,`account_block`,`account_wifi_ssid`,`account_wifi_password`,`account_key`,`account_email`,`account_time`,`account_use`) VALUES 
+ (1,'3ae7f4ab84f659fc2f0703382c20db279976ff82c2f540078003c07778cc0053',0,'c','ABCabc123ZXCzxc','','','0000-00-00 00:00:00',0),
+ (2,'a',0,'E3P7atrick is a very good name','12345678901234567890123456789012345678901234567890A','','','0000-00-00 00:00:00',0);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 
 

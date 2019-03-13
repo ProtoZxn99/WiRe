@@ -22,7 +22,7 @@ if(!is_null($exec['state'])){
     echo $state;
 }
 else{
-    echo 0;
+    echo -1;
 }
 
 include '_footer.php';

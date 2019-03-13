@@ -13,12 +13,12 @@ $query = mysqli_query($conn, "SELECT confirmation_email as email, account_pass a
 
 while($exec = mysqli_fetch_array($query)){
     if(hash("sha256",$header_salt.$exec['user'].$end_salt)==$confirmation_email){
-        $moving = mysqli_query($conn, "insert into account (account_email, account_pass, account_block, account_key) values ('".$exec["email"]."','".$exec["pass"]."', 0, '".substr(str_pad($exec['email'],16,'w',STR_PAD_LEFT),0,16)."');");
+        $moving = mysqli_query($conn, "insert into account (account_email, account_pass, account_block, account_key, account_time) values ('".$exec["email"]."','".$exec["pass"]."', 0, '".substr(str_pad($exec['email'],16,'w',STR_PAD_LEFT),0,16)."',now());");
         $delete = mysqli_query($conn, "delete from confirmation where confirmation_email = '".$exec["email"]."';");
         echo 1;
         die();
     }
 }
-echo $error['registration_fail'];
+echo $GLOBALS['error']['registration_fail'];
 
 include '_footer.php';
