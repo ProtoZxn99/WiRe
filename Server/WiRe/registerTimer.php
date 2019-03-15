@@ -26,4 +26,6 @@ ValidateUser($account_id, $account_password);
 
 $query = mysqli_query($conn, "insert into timer (grouping_id, timer_name, timer_start, timer_action, timer_state, timer_d0, timer_d1, timer_d2, timer_d3, timer_d4, timer_d5, timer_d6) values ('".$grouping_id."','".$timer_name."','". $timer_start."',".$timer_action.",".$timer_state.",".$timer_d0.",".$timer_d1.",".$timer_d2.",".$timer_d3.",".$timer_d4.",".$timer_d5.",".$timer_d6.");");
 
+echo 1;
+
 include '_footer.php';

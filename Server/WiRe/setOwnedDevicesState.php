@@ -9,4 +9,6 @@ ValidateUser($account_id, $account_password);
 
 $query = mysqli_query($conn, "update device set device_state = ".$device_state." where account_id = ".$account_id.";");
 
+echo 1;
+
 include '_footer.php';

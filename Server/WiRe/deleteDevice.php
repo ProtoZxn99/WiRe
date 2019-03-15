@@ -17,4 +17,6 @@ ValidateUser($account_id, $account_password);
 $query = mysqli_query($conn, "delete from member where device_id = '".$device_id."';");
 $query2 = mysqli_query($conn, "update device set account_id = '' where device_id = '".$device_id."';");
 
+echo 1;
+
 include '_footer.php';

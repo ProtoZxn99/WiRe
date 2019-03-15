@@ -18,6 +18,7 @@ $check = mysqli_query($conn, "select count(*) as count from grouping where accou
 $result = mysqli_fetch_array($check);
 if($result['count']<1){
     $query = mysqli_query($conn, "insert into authority (account_id, grouping_id) values (".$account_id.",".$grouping_id.");");
+	echo 1;
 }
 else{
     echo $GLOBALS['error']["group_duplicate"];

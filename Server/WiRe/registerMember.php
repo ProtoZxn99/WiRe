@@ -16,4 +16,6 @@ ValidateUser($account_id, $account_password);
 
 $query = mysqli_query($conn, "insert into member (grouping_id, device_id) values ('".$grouping_id."','".$device_id."')");
 
+echo 1;
+
 include '_footer.php';

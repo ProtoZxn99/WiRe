@@ -15,6 +15,16 @@ function RandomString($length)
     return $randstring;
 }
 
+function RandomInt($length)
+{
+    $characters = '0123456789';
+    $randstring = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randstring .= $characters{rand(0, strlen($characters)-1)};
+    }
+    return $randstring;
+}
+
 function XOR_Encrypt($toEncrypt, $key) {
 
     $output = '';

@@ -16,4 +16,6 @@ ValidateUser($account_id, $account_password);
 
 $query = mysqli_query($conn, "update grouping set grouping_name = '".$grouping_name."' where grouping_id = ".$grouping_id.";");
 
+echo 1;
+
 include '_footer.php';

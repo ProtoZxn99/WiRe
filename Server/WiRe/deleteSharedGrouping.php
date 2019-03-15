@@ -16,4 +16,6 @@ ValidateUser($account_id, $account_password);
 
 $query = mysqli_query($conn, "delete from authority where account_id = ".$account_id." and grouping_id = ".$grouping_id.";");
 
+echo 1;
+
 include '_footer.php';

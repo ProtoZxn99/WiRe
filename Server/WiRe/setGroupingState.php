@@ -14,4 +14,6 @@ while($exec = mysqli_fetch_array($query)){
     $update = mysqli_query($conn, "update device set device_state = ".$device_state." where device_id = '".$exec['id']."';");
 }
 
+echo 1;
+
 include '_footer.php';

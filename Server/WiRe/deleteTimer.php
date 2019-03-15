@@ -15,4 +15,6 @@ ValidateUser($account_id, $account_password);
 
 $query = mysqli_query($conn, "delete from timer where timer_id = ".$timer_id.";");
 
+echo 1;
+
 include '_footer.php';
