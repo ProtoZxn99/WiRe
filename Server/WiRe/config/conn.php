@@ -1,11 +1,16 @@
 <?php
 include "config/traffic.php";
+include "config/errors.php";
+
 //$ip = getIP();
 //checkIP($ip);
 
 $ip_wire = "127.0.0.1";
 $conn = mysqli_connect("localhost", "root", "", "wire");
-
+if(mysqli_connect_errno()){
+        echo $GLOBALS['error']['db_fail'];
+		include '_footer.php';
+    } 
 function ValidateUser($id, $pass){
     $query = mysqli_query($conn, "SELECT account_block as authority FROM account where account_id = '".$account_id."' and account_pass = '".$account_pass."';");
     $exec = mysqli_fetch_array($query);
