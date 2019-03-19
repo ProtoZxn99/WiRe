@@ -8,10 +8,13 @@
 include '_header.php';
 include 'modules/EmailUtils.php';
 include 'modules/FormatUtils.php';
+include 'modules/CryptoUtils.php';
 
 $account_email = mysqli_real_escape_string($conn, $_POST['account_email']);
 
-$query = mysqli_query($conn, "select count(*) as users from account where account_email = '".$account_email."';");
+$ecb = new AES_128_ECB($server_aes);
+
+$query = mysqli_query($conn, "select count(*) as users from account where account_email = '".$ecb->triple_encrypt($account_email)."';");
 $exec = mysqli_fetch_array($query);
 
 if($exec['users']>0){

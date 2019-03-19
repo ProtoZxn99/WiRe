@@ -12,7 +12,6 @@ and open the template in the editor.
         <script type="text/javascript" >
         function isLetters(var inputid)
         { 
-            alert("a");
             var text = document.getElementById(inputid).value;
             var letters = /^[0-9a-zA-Z]+$/;
             if(text.match(letters))

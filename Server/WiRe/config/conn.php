@@ -12,7 +12,13 @@ if(mysqli_connect_errno()){
 		include '_footer.php';
     } 
 function ValidateUser($id, $pass){
-    $query = mysqli_query($conn, "SELECT account_block as authority FROM account where account_id = '".$account_id."' and account_pass = '".$account_pass."';");
+    
+    include 'config/crypto.php';
+    include 'modules/CryptoUtils.php';
+        
+    $ecb = new AES_128_ECB($server_aes);
+    
+    $query = mysqli_query($conn, "SELECT account_block as authority FROM account where account_id = '".$account_id."' and account_pass = '".$ecb->encrypt($account_pass)."';");
     $exec = mysqli_fetch_array($query);
 
     if(!is_null($exec['authority'])){
@@ -25,5 +31,5 @@ function ValidateUser($id, $pass){
         echo $GLOBALS['error']['wrong_format'];
         include '_footer.php';
     }
-//    scheckAccount($ip, $id);
+//    checkAccount($ip, $id);
 }

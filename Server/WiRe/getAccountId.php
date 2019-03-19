@@ -3,7 +3,6 @@ include '_header.php';
 
 $account_email = mysqli_real_escape_string($conn, $_POST['account_email']);
 $account_pass = mysqli_real_escape_string($conn, $_POST['account_pass']);
-$account_key = mysqli_real_escape_string($conn, $_POST['account_key']);
 
 $query = mysqli_query($conn, "SELECT account_id as id, account_block as authority, account_use as use FROM account where account_email = '".$account_email."' and account_pass = '".$account_pass."';");
 $exec = mysqli_fetch_array($query);

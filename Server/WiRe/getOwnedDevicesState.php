@@ -3,7 +3,7 @@ include '_header.php';
 
 $account_id = mysqli_real_escape_string($conn, $_POST['account_id']);
 
-$query = mysqli_query($conn, "SELECT count(*)-sum(device_state) as off_device FROM device where device_id  in(select device_id from device where account_id = ".$account_id.");");
+$query = mysqli_query($conn, "SELECT count(*)-sum(device_state) as off_device FROM device where device_id in (select device_id from device where account_id = ".$account_id.");");
 $exec = mysqli_fetch_array($query);
 
 if(!is_null($exec['state'])){

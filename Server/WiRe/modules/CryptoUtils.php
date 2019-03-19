@@ -5,6 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 function RandomString($length)
 {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -55,6 +56,10 @@ class AES_128_ECB
         $this->key = $key;
     }
     
+    public function triple_encrypt($str){
+        return $this->encrypt($this->encrypt($this->encrypt($str)));
+    }
+    
     public function encrypt($str)
     {
         $block = mcrypt_get_block_size("rijndael_128", "ecb");
@@ -63,7 +68,11 @@ class AES_128_ECB
         $result =  base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $this->key, $str, MCRYPT_MODE_ECB));
         return $result;
     }
-
+    
+    public function triple_decrypt($str){
+        return $this->decrypt($this->decrypt($this->decrypt($str)));
+    }
+    
     public function decrypt($str)
     {
         $str = base64_decode($str);
@@ -98,7 +107,7 @@ class AES_128_CBC
 
     function encrypt($str) {
 
-      //$key = $this->hex2bin($key);    
+      //$key = $this->hex2bin($key);
         $iv = $this->iv;
 
         $td = mcrypt_module_open('rijndael-128', '', 'cbc', $iv);

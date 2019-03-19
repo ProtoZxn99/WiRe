@@ -6,19 +6,26 @@
  * and open the template in the editor.
  */
 include '_header.php';
+include 'config/crypto.php';
+include 'modules/CryptoUtils.php';
 
 $account_email = mysqli_real_escape_string($conn, $_POST['account_email']);
 $account_password = mysqli_real_escape_string($conn, $_POST['account_password']);
 
 $query = mysqli_query($conn, "SELECT account_email as email FROM account;");
 
+$ecb = new AES_128_ECB($server_aes);
+
 while($exec = mysqli_fetch_array($query)){
-    if(hash("sha256",$header_salt.$exec['email'].$end_salt)==$account_email){
-        $unique_salt = substr($more_salt, strlen($email)%strlen($more_salt));
-        $query = mysqli_query($conn, "update account set account_password = '".hash("sha256",$header_salt.$unique_salt.$account_password.$account_email.$end_salt)."' where account_email = '".$exec['user']."';");
+
+    $real_email = $ecb->triple_decrypt($exec['email']);
+    if(hash("sha256",$header_salt.$real_email.$end_salt)==$account_email){
+        $unique_salt = substr($more_salt, strlen($real_email)%strlen($more_salt));
+        $password = hash("sha256",$header_salt.$unique_salt.$account_password.$real_email.$end_salt);
+        $query = mysqli_query($conn, "update account set account_password = '".$ecb->encrypt($password)."' where account_email = '".$exec['email']."';");
         echo "Your password has successfully been changed";
         
-        include 'config/footer.php';
+        include '_footer.php';
     }
 }
 echo $GLOBALS['error']["email_fail"];
