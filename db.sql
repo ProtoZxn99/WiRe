@@ -28,12 +28,12 @@ USE wire;
 DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account` (
   `account_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `account_password` varchar(64) NOT NULL,
+  `account_password` varchar(200) NOT NULL DEFAULT '',
   `account_block` tinyint(1) NOT NULL DEFAULT '0',
   `account_wifi_ssid` varchar(32) DEFAULT NULL,
-  `account_wifi_password` varchar(63) DEFAULT NULL,
-  `account_key` varchar(16) NOT NULL,
-  `account_email` varchar(100) NOT NULL,
+  `account_wifi_password` varchar(64) DEFAULT NULL,
+  `account_key` varchar(16) NOT NULL DEFAULT '',
+  `account_email` varchar(200) NOT NULL DEFAULT '',
   `account_time` datetime NOT NULL,
   `account_use` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`account_id`) USING BTREE
@@ -45,8 +45,8 @@ CREATE TABLE `account` (
 
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
 INSERT INTO `account` (`account_id`,`account_password`,`account_block`,`account_wifi_ssid`,`account_wifi_password`,`account_key`,`account_email`,`account_time`,`account_use`) VALUES 
- (1,'3ae7f4ab84f659fc2f0703382c20db279976ff82c2f540078003c07778cc0053',0,'c','ABCabc123ZXCzxc','','','0000-00-00 00:00:00',0),
- (2,'a',0,'E3P7atrick is a very good name','12345678901234567890123456789012345678901234567890A','','','0000-00-00 00:00:00',0);
+ (1,'mE6eq4lQmg6QRWT+Pt8C9VGVneYOkBW3xzP2RWT5gwG5T0JTKprvO0WkgnXS5CKJ',0,'c','ABCabc123ZXCzxc','','0aVjQWFx2txQpiGGhWQquboSH+oLjOWi2w45jI1BK4aCAFf7b0pcg4jXznpCq3lp','0000-00-00 00:00:00',0),
+ (2,'a+B1wYx8bz6DdjMX8/2NTCaQE8m0nEeN4Nx9P/zfN2R2MJr2Qjx+iyv7wWdsaCgG6pqaj+2j+cbJVeKp5Tdwwc5ricRoqLIwbis3fRqp6FM=',0,'E3P7atrick is a very good name','8KcHZssPJ7q4abLmAjmo2CYvqYYSEHSYGLqtXi0JI7dpxpe075D5FnrhLnFQC3i','','8KcHZssPJ7q4abLmAjmo2CYvqYYSEHSYGLqtXi0JI7dpxpe075D5FnrhLnFQC3iXTawU4PjYyClLVyS8zRN4885ricRoqLIwbis3fRqp6FM=','0000-00-00 00:00:00',0);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 
 
