@@ -12,7 +12,7 @@ $account_id = mysqli_real_escape_string($conn, $_POST['account_id']);
 $account_password = mysqli_real_escape_string($conn, $_POST['account_password']);
 $grouping_id = mysqli_real_escape_string($conn, $_POST['grouping_id']);
 
-ValidateUser($account_id, $account_password);
+ValidateUser($conn, $account_id, $account_password);
 
 $query = mysqli_query($conn, "delete from timer where grouping_id = ".$grouping_id.";");
 $query2 = mysqli_query($conn, "delete from authority where grouping_id = ".$grouping_id.";");

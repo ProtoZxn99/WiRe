@@ -13,7 +13,7 @@ $account_id = mysqli_real_escape_string($conn, $_POST['account_id']);
 $account_password = mysqli_real_escape_string($conn, $_POST['account_password']);
 $account_key = mysqli_real_escape_string($conn, $_POST['account_key']);
 
-ValidateUser($account_id, $account_password);
+ValidateUser($conn, $account_id, $account_password);
 
 echo DiffieHellman_Count($account_key, $account_id);
 

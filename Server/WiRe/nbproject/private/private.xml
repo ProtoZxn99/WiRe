@@ -3,26 +3,33 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/updateGrouping.php</file>
-            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/getOwnedDevicesState.php</file>
-            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/updateAccountWiFi.php</file>
-            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/config/crypto.php</file>
+            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/deleteGrouping.php</file>
             <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/confirmAccountPasswordChange.php</file>
             <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/getDeviceOwner.php</file>
             <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/getAccountWiFiPassword.php</file>
             <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/getDeviceState.php</file>
-            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/deleteTimer.php</file>
-            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/updateAccountPassword.php</file>
             <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/resetAccountPassword.php</file>
             <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/modules/CryptoUtils.php</file>
-            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/confirmAccountRegistration.php</file>
+            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/setDeviceState.php</file>
+            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/setAccountUse.php</file>
             <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/setAccountKey.php</file>
-            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/registerAccount.php</file>
             <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/deleteSharedGrouping.php</file>
-            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/getGroupingDevices.php</file>
-            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/getOwnedTimers.php</file>
-            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/a.php</file>
+            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/deleteDevice.php</file>
+            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/getAccountId.php</file>
             <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/getDeviceWiFiSSID.php</file>
+            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/registerMember.php</file>
+            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/config/crypto.php</file>
+            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/FormAccountPasswordChange.php</file>
+            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/registerGrouping.php</file>
+            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/getDeviceWiFiPassword.php</file>
+            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/getGroupingState.php</file>
+            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/updateAccountPassword.php</file>
+            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/confirmAccountRegistration.php</file>
+            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/registerAccount.php</file>
+            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/config/conn.php</file>
+            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/deleteGroupingDevice.php</file>
+            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/index.php</file>
+            <file>file:/D:/xampp/htdocs/WiRe/Server/WiRe/registerSharedGrouping.php</file>
         </group>
     </open-files>
 </project-private>

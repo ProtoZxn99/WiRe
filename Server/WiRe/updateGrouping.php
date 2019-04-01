@@ -12,7 +12,7 @@ $account_password = mysqli_real_escape_string($conn, $_POST['account_password'])
 $grouping_id = mysqli_real_escape_string($conn, $_POST['grouping_id']);
 $grouping_name = mysqli_real_escape_string($conn, $_POST['grouping_name']);
 
-ValidateUser($account_id, $account_password);
+ValidateUser($conn, $account_id, $account_password);
 
 $query = mysqli_query($conn, "update grouping set grouping_name = '".$grouping_name."' where grouping_id = ".$grouping_id.";");
 

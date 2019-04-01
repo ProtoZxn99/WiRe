@@ -12,7 +12,7 @@ $account_password = mysqli_real_escape_string($conn, $_POST['account_password'])
 $grouping_id = mysqli_real_escape_string($conn, $_POST['grouping_id']);
 $device_id = mysqli_real_escape_string($conn, $_POST['device_id']);
 
-ValidateUser($account_id, $account_password);
+ValidateUser($conn, $account_id, $account_password);
 
 $query = mysqli_query($conn, "insert into member (grouping_id, device_id) values ('".$grouping_id."','".$device_id."')");
 

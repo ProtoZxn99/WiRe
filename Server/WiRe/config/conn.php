@@ -7,18 +7,16 @@ include 'modules/CryptoUtils.php';
 //checkIP();
 
 $ip_wire = "127.0.0.1";
-$conn = mysqli_connect("localhost", "root", "", "wire");
+$conn = mysqli_connect($ip_wire, "root", "", "wire");
 if(mysqli_connect_errno()){
         echo $GLOBALS['error']['db_fail'];
 		include '_footer.php';
     } 
-function ValidateUser($id, $pass){
+function ValidateUser($conn, $account_id, $account_password){
     
-    $ecb = new AES_128_ECB($GLOBALS['crypto']['server_aes']);
-    
-    $query = mysqli_query($conn, "SELECT account_block as authority FROM account where account_id = '".$account_id."' and account_pass = '".$ecb->encrypt($account_pass)."';");
+    $query = mysqli_query($conn, "SELECT account_block as authority FROM account where account_id = '".$account_id."' and account_password = '".$account_password."';");
     $exec = mysqli_fetch_array($query);
-
+    
     if(!is_null($exec['authority'])){
         if($exec['authority']>0){
             echo $GLOBALS['error']["id_block"];
@@ -29,5 +27,6 @@ function ValidateUser($id, $pass){
         echo $GLOBALS['error']['wrong_format'];
         include '_footer.php';
     }
+    echo "berhasil";
 //    linkAccount($id);
 }

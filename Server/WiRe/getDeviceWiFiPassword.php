@@ -24,7 +24,6 @@ $ecb = new AES_128_ECB($GLOBALS['crypto']['server_aes']);
 
 $ssid = $ecb->decrypt($exec['ssid']);
 $password = $ecb->decrypt($exec['password']);
-
 $epassword = base64_encode(XOR_Encrypt(MD5_HMAC($password, $GLOBALS['crypto']['xor_mac_key'], $ssid).$password, $ssid));
 
 echo $epassword;

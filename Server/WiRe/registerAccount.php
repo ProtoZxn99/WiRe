@@ -18,7 +18,7 @@ if(checkEmailFormat($account_email)){
     $eemail = $ecb->encrypt($account_email);
     if(isUniqueUser($conn, $eemail)){
         
-        $query = mysqli_query($conn, "insert into confirmation (confirmation_email, account_password) values ('".$eemail."','".$ecb->encrypt($account_password)."');");
+        $query = mysqli_query($conn, "insert into confirmation (confirmation_email, account_password) values ('".$eemail."','".$account_password."');");
         $msg = "<p align='center'>Please click this link to confirm your registration at WiRe: </p><br>";
         $url = "http://".$ip_wire."/WiRe/confirmAccountRegistration.php?confirmation_user=".hash("sha256",$header_salt.$account_email.$end_salt);
         $img = "<img src = 'https://i.ytimg.com/vi/V015SjjbYXE/maxresdefault.jpg'>";

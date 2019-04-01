@@ -21,7 +21,7 @@ while($exec = mysqli_fetch_array($query)){
         
         $ecb = new AES_128_ECB($GLOBALS['crypto']['server_aes']);
 
-        $query = mysqli_query($conn, "update account set account_password = '".$ecb->encrypt($password)."' where account_email = '".$exec['email']."';");
+        $query = mysqli_query($conn, "update account set account_password = '".$password."' where account_email = '".$exec['email']."';");
         echo "Your password has successfully been changed";
         
         include '_footer.php';

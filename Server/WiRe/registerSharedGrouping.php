@@ -14,7 +14,7 @@ $grouping_id = mysqli_real_escape_string($conn, $_POST['grouping_id']);
 $owner_email = mysqli_real_escape_string($conn, $_POST['owner_email']);
 $owner_password = mysqli_real_escape_string($conn, $_POST['owner_password']);
 
-ValidateUser($account_id, $account_password);
+ValidateUser($conn, $account_id, $account_password);
 
 $ecb = new AES_128_CBC($GLOBALS['crypto']['server_aes']);
 

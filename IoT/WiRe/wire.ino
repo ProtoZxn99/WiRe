@@ -12,7 +12,7 @@
 static String ssid = "cd4687"; //replace this with your WiFi network name
 static String password = "278019560"; //replace this with your WiFi network password
 
-static const String server_url = "http://192.168.0.17/wire/server/wire/";
+static const String server_url = "http://192.168.0.29/wire/server/wire/";
 
 static const String server_key = "ConcealM4CtoHackers";
 static String encrypted_id;
@@ -122,15 +122,23 @@ String Base64_Decode (String encoded){
   int decodedLen = base64_dec_len(input, inputLen);
   char decoded[decodedLen];
   base64_decode(decoded, input, inputLen);
+  String result = "";
   
-  return String(decoded);
+  for(int i = 0; i<sizeof(decoded)/sizeof(char); i++){
+    result += decoded[i];
+  }
+  
+  return decoded;
 }
 
 void UpdateWiFiInfo(){
   String new_ssid = HTTPGetRequest(server_url+"getDeviceWiFiSSID.php?device_id="+encrypted_id);
-  new_ssid = XOR_Encrypt(Base64_Decode(new_ssid), ssid_key);
+
+  new_ssid = XOR_Encrypt(Base64_Decode(new_ssid), ssid_key);  
+
   String new_hmac = new_ssid.substring(0,32);
   new_ssid = new_ssid.substring(32);
+
   String check_hmac = MD5_HMAC(new_ssid,server_key,ssid_key);
   if(new_hmac==check_hmac){
     String new_password = HTTPGetRequest(server_url+"getDeviceWiFiPassword.php?device_id="+encrypted_id);
@@ -198,9 +206,9 @@ void loop() {
       UpdateWiFiInfo();
     }
     digitalWrite(D0,LOW);
-    for(int i = 0; i<sizeof(listpin); i++){
+    for(int i = 0; i<sizeof(listpin)/sizeof(int); i++){
       String state = HTTPGetRequest(server_url+"getDeviceState.php?device_id="+encrypted_id+"&device_pin="+listpin[i]);
-      if(state.length()>1){
+       if(state.length()>1){
         state = XOR_Encrypt(Base64_Decode(state), WiFi.macAddress());
         String new_hmac = state.substring(0,32);
         state = state.substring(32);

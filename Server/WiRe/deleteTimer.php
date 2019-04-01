@@ -11,7 +11,7 @@ $account_id = mysqli_real_escape_string($conn, $_POST['account_id']);
 $account_password = mysqli_real_escape_string($conn, $_POST['account_password']);
 $timer_id = mysqli_real_escape_string($conn, $_POST['timer_id']);
 
-ValidateUser($account_id, $account_password);
+ValidateUser($conn, $account_id, $account_password);
 
 $query = mysqli_query($conn, "delete from timer where timer_id = ".$timer_id.";");
 

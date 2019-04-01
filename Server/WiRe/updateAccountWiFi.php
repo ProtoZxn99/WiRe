@@ -12,7 +12,7 @@ $account_password = mysqli_real_escape_string($conn, $_POST['account_password'])
 $account_wifi_ssid = mysqli_real_escape_string($conn, $_POST['account_wifi_ssid']);
 $account_wifi_password = mysqli_real_escape_string($conn, $_POST['account_wifi_password']);
 
-ValidateUser($account_id, $account_password);
+ValidateUser($conn, $account_id, $account_password);
 
 $ecb = new AES_128_ECB($GLOBALS['crypto']['server_aes']);
 

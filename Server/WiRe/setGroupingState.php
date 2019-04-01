@@ -6,7 +6,7 @@ $account_password = mysqli_real_escape_string($conn, $_POST['account_password'])
 $grouping_id = mysqli_real_escape_string($conn, $_POST['grouping_id']);
 $device_state = mysqli_real_escape_string($conn, $_POST['device_state']);
 
-ValidateUser($account_id, $account_password);
+ValidateUser($conn, $account_id, $account_password);
 
 $query = mysqli_query($conn, "SELECT device_id as id FROM device where device_id in (select device_id from member where grouping_id = ".$grouping_id.");");
 

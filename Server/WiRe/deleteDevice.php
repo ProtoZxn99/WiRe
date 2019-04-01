@@ -12,7 +12,7 @@ $account_id = mysqli_real_escape_string($conn, $_POST['account_id']);
 $account_password = mysqli_real_escape_string($conn, $_POST['account_password']);
 $device_id = mysqli_real_escape_string($conn, $_POST['device_id']);
 
-ValidateUser($account_id, $account_password);
+ValidateUser($conn, $account_id, $account_password);
 
 $query = mysqli_query($conn, "delete from member where device_id = '".$device_id."';");
 $query2 = mysqli_query($conn, "update device set account_id = '' where device_id = '".$device_id."';");
