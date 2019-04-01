@@ -56,9 +56,9 @@ class AES_128_ECB
         $this->key = $key;
     }
     
-    public function triple_encrypt($str){
-        return $this->encrypt($this->encrypt($this->encrypt($str)));
-    }
+//    public function triple_encrypt($str){
+//        return $this->encrypt($this->encrypt($this->encrypt($str)));
+//    }
     
     public function encrypt($str)
     {
@@ -69,9 +69,9 @@ class AES_128_ECB
         return $result;
     }
     
-    public function triple_decrypt($str){
-        return $this->decrypt($this->decrypt($this->decrypt($str)));
-    }
+//    public function triple_decrypt($str){
+//        return $this->decrypt($this->decrypt($this->decrypt($str)));
+//    }
     
     public function decrypt($str)
     {

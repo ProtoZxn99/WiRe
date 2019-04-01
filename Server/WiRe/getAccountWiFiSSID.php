@@ -15,6 +15,8 @@ ValidateUser($account_id, $account_password);
 $query = mysqli_query($conn, "select account_wifi_ssid as ssid from account where account_id = ".$account_id." limit 1;");
 $exec = mysqli_fetch_array($query);
 
-echo $exec['ssid'];
+$ecb = new AES_128_ECB($GLOBALS['crypto']['server_aes']);
+
+echo $ecb->decrypt($exec['ssid']);
 
 include '_footer.php';

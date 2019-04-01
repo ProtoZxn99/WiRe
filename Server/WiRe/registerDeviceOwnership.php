@@ -13,7 +13,7 @@ $device_id = mysqli_real_escape_string($conn, $_POST['device_id']);
 
 ValidateUser($account_id, $account_password);
 
-$query = mysqli_query($conn, "update into device set account_id = ".$account_id." where device_id = '".$device_id."';");
+$query = mysqli_query($conn, "update into device set account_id = ".$account_id." where device_id like '".$device_id."-%';");
 
 echo 1;
 

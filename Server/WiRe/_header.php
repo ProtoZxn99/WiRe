@@ -6,6 +6,4 @@
  * and open the template in the editor.
  */
 
-include "config/errors.php";
 include "config/conn.php";
-include "config/crypto.php";
