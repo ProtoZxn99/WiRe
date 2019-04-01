@@ -1,17 +1,17 @@
 <?php
 include '_header.php';
 
-$account_email = mysqli_real_escape_string($conn, $_GET['account_email']);
-$account_password = mysqli_real_escape_string($conn, $_GET['account_password']);
+$account_email = mysqli_real_escape_string($conn, $_POST['account_email']);
+$account_password = mysqli_real_escape_string($conn, $_POST['account_password']);
 
 $ecb = new AES_128_ECB($GLOBALS['crypto']['server_aes']);
 
-$query = mysqli_query($conn, "SELECT account_id as id, account_block as block, account_use as using FROM account where account_email = '".$ecb->encrypt($account_email)."' and account_password = '".$account_password."' limit 1;");
+$query = mysqli_query($conn, "SELECT account_id as id, account_block as block, account_use as used FROM account where account_email = '".$ecb->encrypt($account_email)."' and account_password = '".$account_password."' limit 1;");
 $exec = mysqli_fetch_array($query);
 
 if(!is_null($exec['block'])){
     if($exec['block']<1){
-        if($exec['using']<1){
+        if($exec['used']<1){
                 $query = mysqli_query($conn, "update set account_use = 1 where account_id = ".$exec['id'].";");
                 echo $exec['id'];
         }
