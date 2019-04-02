@@ -27,6 +27,5 @@ function ValidateUser($conn, $account_id, $account_password){
         echo $GLOBALS['error']['wrong_format'];
         include '_footer.php';
     }
-    echo "berhasil";
 //    linkAccount($id);
 }
