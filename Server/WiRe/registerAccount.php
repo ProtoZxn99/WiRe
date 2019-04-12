@@ -1,10 +1,4 @@
 <?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 include '_header.php';
 include 'modules/EmailUtils.php';
 include 'modules/FormatUtils.php';
@@ -12,12 +6,10 @@ include 'modules/FormatUtils.php';
 $account_email = mysqli_real_escape_string($conn, $_GET['account_email']);
 $account_password = mysqli_real_escape_string($conn, $_GET['account_password']);
 
-
 if(checkEmailFormat($account_email)){
     $ecb = new AES_128_ECB($GLOBALS['crypto']['server_aes']);
     $eemail = $ecb->encrypt($account_email);
     if(isUniqueUser($conn, $eemail)){
-        
         $query = mysqli_query($conn, "insert into confirmation (confirmation_email, account_password) values ('".$eemail."','".$account_password."');");
         $msg = "<p align='center'>Please click this link to confirm your registration at WiRe: </p><br>";
         $url = "http://".$ip_wire."/WiRe/confirmAccountRegistration.php?confirmation_user=".hash("sha256",$GLOBALS['crypto']['header_salt'].$account_email.$GLOBALS['crypto']['end_salt']);

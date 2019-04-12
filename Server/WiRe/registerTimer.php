@@ -1,10 +1,4 @@
 <?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 include '_header.php';
 
 $account_id = mysqli_real_escape_string($conn, $_POST['account_id']);
@@ -21,8 +15,11 @@ $timer_d3 = mysqli_real_escape_string($conn, $_POST['timer_d3']);
 $timer_d4 = mysqli_real_escape_string($conn, $_POST['timer_d4']);
 $timer_d5 = mysqli_real_escape_string($conn, $_POST['timer_d5']);
 $timer_d6 = mysqli_real_escape_string($conn, $_POST['timer_d6']);
+$iv = mysqli_real_escape_string($conn, $_POST['iv']);
 
-ValidateUser($conn, $account_id, $account_password);
+$chat_key = ValidateUser($conn, $account_id, $account_password);
+
+$cbc = new AES_128_CBC($chat_key, $iv);
 
 $query = mysqli_query($conn, "insert into timer (grouping_id, timer_name, timer_start, timer_action, timer_state, timer_d0, timer_d1, timer_d2, timer_d3, timer_d4, timer_d5, timer_d6) values ('".$grouping_id."','".$timer_name."','". $timer_start."',".$timer_action.",".$timer_state.",".$timer_d0.",".$timer_d1.",".$timer_d2.",".$timer_d3.",".$timer_d4.",".$timer_d5.",".$timer_d6.");");
 

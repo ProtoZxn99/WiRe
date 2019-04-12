@@ -8,10 +8,12 @@ include 'modules/CryptoUtils.php';
 
 $ip_wire = "127.0.0.1";
 $conn = mysqli_connect($ip_wire, "root", "", "wire");
+
 if(mysqli_connect_errno()){
         echo $GLOBALS['error']['db_fail'];
-		include '_footer.php';
-    } 
+	include '_footer.php';
+} 
+    
 function ValidateUser($conn, $account_id, $account_password){
     
     $query = mysqli_query($conn, "SELECT account_block as authority FROM account where account_id = '".$account_id."' and account_password = '".$account_password."';");
@@ -21,6 +23,17 @@ function ValidateUser($conn, $account_id, $account_password){
         if($exec['authority']>0){
             echo $GLOBALS['error']["id_block"];
             include '_footer.php';
+        }
+        else{
+            $query_key = mysqli_query($conn, "SELECT account_key as chat_key FROM account where account_id = '".$account_id."';");
+            $exec_key = mysqli_fetch_array($query);
+            if($exec_key['chat_key']!=null){
+                return $exec_key['chat_key'];
+            }
+            else{
+                echo $GLOBALS['error']["id_fail"];
+                include '_footer.php';
+            }
         }
     }
     else{
