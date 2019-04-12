@@ -1,6 +1,5 @@
 <?php
 include '_header.php';
-include 'modules/CryptoUtils.php';
 
 $confirmation_email = mysqli_real_escape_string($conn, $_GET['confirmation_email']);
 

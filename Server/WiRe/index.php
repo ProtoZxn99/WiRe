@@ -13,7 +13,7 @@ and open the template in the editor.
         NGAPAIN LIHAT<sup>2</sup>
         <?php
             
-            include "config/conn.php";
+            include "_header.php";
             
             $ecb = new AES_128_ECB($GLOBALS['crypto']['server_aes']);
             echo $GLOBALS['crypto']['server_aes']."<Br>";

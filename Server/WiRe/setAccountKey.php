@@ -1,7 +1,5 @@
 <?php
 include '_header.php';
-include 'config/crypto.php';
-include 'modules/CryptoUtils.php';
 
 $account_id = mysqli_real_escape_string($conn, $_POST['account_id']);
 $account_password = mysqli_real_escape_string($conn, $_POST['account_password']);

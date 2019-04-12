@@ -2,7 +2,6 @@
 include '_header.php';
 include 'modules/EmailUtils.php';
 include 'modules/FormatUtils.php';
-include 'modules/CryptoUtils.php';
 
 $account_email = mysqli_real_escape_string($conn, $_POST['account_email']);
 
