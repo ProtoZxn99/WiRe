@@ -8,6 +8,7 @@ $account_password = mysqli_real_escape_string($conn, $_GET['account_password']);
 
 if(checkEmailFormat($account_email)){
     $ecb = new AES_128_ECB($GLOBALS['crypto']['server_aes']);
+    
     $eemail = $ecb->encrypt($account_email);
     if(isUniqueUser($conn, $eemail)){
         $query = mysqli_query($conn, "insert into confirmation (confirmation_email, account_password) values ('".$eemail."','".$account_password."');");

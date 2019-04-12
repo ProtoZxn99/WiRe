@@ -15,4 +15,6 @@ $query2 = mysqli_query($conn, "delete from authority where grouping_id = ".$grou
 $query3 = mysqli_query($conn, "delete from member where grouping_id = ".$grouping_id.";");
 $query4 = mysqli_query($conn, "delete from grouping where grouping_id = ".$grouping_id.";");
 
+echo 1;
+
 include '_footer.php';

@@ -14,6 +14,6 @@ $exec = mysqli_fetch_array($query);
 
 $ecb = new AES_128_ECB($GLOBALS['crypto']['server_aes']);
 
-echo $ecb->decrypt($exec['password']);
+echo $cbc->encrypt($ecb->decrypt($exec['password']));
 
 include '_footer.php';
