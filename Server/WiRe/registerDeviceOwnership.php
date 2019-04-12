@@ -10,6 +10,8 @@ $chat_key = ValidateUser($conn, $account_id, $account_password);
 
 $cbc = new AES_128_CBC($chat_key, $iv);
 
+$device_id = $cbc->decrypt($device_id);
+
 $query = mysqli_query($conn, "update into device set account_id = ".$account_id." where device_id like '".$device_id."-%';");
 
 echo 1;

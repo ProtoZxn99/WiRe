@@ -10,6 +10,8 @@ $chat_key = ValidateUser($conn, $account_id, $account_password);
 
 $cbc = new AES_128_CBC($chat_key, $iv);
 
+$grouping_id = $cbc->decrypt($grouping_id);
+
 $query = mysqli_query($conn, "delete from timer where grouping_id = ".$grouping_id.";");
 $query2 = mysqli_query($conn, "delete from authority where grouping_id = ".$grouping_id.";");
 $query3 = mysqli_query($conn, "delete from member where grouping_id = ".$grouping_id.";");

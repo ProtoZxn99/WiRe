@@ -12,6 +12,10 @@ $chat_key = ValidateUser($conn, $account_id, $account_password);
 
 $cbc = new AES_128_CBC($chat_key, $iv);
 
+$grouping_id = $cbc->decrypt($grouping_id);
+$owner_email = $cbc->decrypt($owner_email);
+$owner_password = $cbc->decrypt($owner_password);
+
 $ecb = new AES_128_CBC($GLOBALS['crypto']['server_aes']);
 
 $check = mysqli_query($conn, "select count(*) as count from account a, grouping g where a.account_id = g.account_id and a.account_email = ".$ecb->encrypt($owner_email)." and a.account_password = '".$ecb->encrypt($owner_password)."' and g.grouping_id = ".$grouping_id.";");

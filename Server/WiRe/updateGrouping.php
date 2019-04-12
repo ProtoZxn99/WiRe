@@ -11,6 +11,9 @@ $chat_key = ValidateUser($conn, $account_id, $account_password);
 
 $cbc = new AES_128_CBC($chat_key, $iv);
 
+$grouping_id = $cbc->decrypt($grouping_id);
+$grouping_name = $cbc->decrypt($grouping_name);
+
 $query = mysqli_query($conn, "update grouping set grouping_name = '".$grouping_name."' where grouping_id = ".$grouping_id.";");
 
 echo 1;

@@ -11,6 +11,9 @@ $chat_key = ValidateUser($conn, $account_id, $account_password);
 
 $cbc = new AES_128_CBC($chat_key, $iv);
 
+$device_id = $cbc->decrypt($device_id);
+$grouping_id = $cbc->decrypt($grouping_id);
+
 $query = mysqli_query($conn, "insert into member (grouping_id, device_id) values ('".$grouping_id."','".$device_id."')");
 
 echo 1;

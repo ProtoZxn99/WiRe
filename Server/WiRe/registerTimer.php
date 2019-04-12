@@ -21,6 +21,19 @@ $chat_key = ValidateUser($conn, $account_id, $account_password);
 
 $cbc = new AES_128_CBC($chat_key, $iv);
 
+$grouping_id = $cbc->decrypt($grouping_id);
+$timer_name = $cbc->decrypt($timer_name);
+$timer_start = $cbc->decrypt($timer_start);
+$timer_action = $cbc->decrypt($timer_action);
+$timer_state = $cbc->decrypt($timer_state);
+$timer_d0 = $cbc->decrypt($timer_d0);
+$timer_d1 = $cbc->decrypt($timer_d1);
+$timer_d2 = $cbc->decrypt($timer_d2);
+$timer_d3 = $cbc->decrypt($timer_d3);
+$timer_d4 = $cbc->decrypt($timer_d4);
+$timer_d5 = $cbc->decrypt($timer_d5);
+$timer_d6 = $cbc->decrypt($timer_d6);
+
 $query = mysqli_query($conn, "insert into timer (grouping_id, timer_name, timer_start, timer_action, timer_state, timer_d0, timer_d1, timer_d2, timer_d3, timer_d4, timer_d5, timer_d6) values ('".$grouping_id."','".$timer_name."','". $timer_start."',".$timer_action.",".$timer_state.",".$timer_d0.",".$timer_d1.",".$timer_d2.",".$timer_d3.",".$timer_d4.",".$timer_d5.",".$timer_d6.");");
 
 echo 1;

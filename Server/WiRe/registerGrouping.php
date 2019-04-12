@@ -10,6 +10,8 @@ $chat_key = ValidateUser($conn, $account_id, $account_password);
 
 $cbc = new AES_128_CBC($chat_key, $iv);
 
+$grouping_name = $cbc->decrypt(grouping_name);
+
 $query = mysqli_query($conn, "insert into grouping (account_id,grouping_name) values (".$account_id.",'".$grouping_name."')");
 
 echo 1;

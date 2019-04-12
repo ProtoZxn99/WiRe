@@ -12,6 +12,8 @@ $chat_key = ValidateUser($conn, $account_id, $account_password);
 
 $cbc = new AES_128_CBC($chat_key, $iv);
 
+$account_key = $cbc->decrypt($account_key);
+
 echo DiffieHellman_Count($account_key, $account_id);
 
 include '_footer.php';
