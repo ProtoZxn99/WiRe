@@ -18,18 +18,20 @@ if($dummy_id!=$account_id){
     include '_footer.php';
 }
 
+ValidateUser($conn, $account_id, $account_password);
+
 echo DiffieHellman_Count($conn, $account_key, $account_id);
 
 include '_footer.php';
 
 function DiffieHellman_Count($conn, $pub_client, $account_id){
-                $pri_server = RandomInt($GLOBALS['crypto']['diffiehellman_length']);
-                $pub_server = bcpowmod($GLOBALS['crypto']['diffiehellman_base'],$pri_server,$GLOBALS['crypto']['diffiehellman_limit']);
-                $shared = bcpowmod($pub_client,$pri_server,$GLOBALS['crypto']['diffiehellman_limit']);
-                $shared = substr(base64_encode($shared), 0, 16);
-                Save_Shared($conn, $shared, $account_id);
-                return $pub_server;
-        }
+		$pri_server = RandomInt($GLOBALS['crypto']['diffiehellman_length']);
+		$pub_server = bcpowmod($GLOBALS['crypto']['diffiehellman_base'],$pri_server,$GLOBALS['crypto']['diffiehellman_limit']);
+		$shared = bcpowmod($pub_client,$pri_server,$GLOBALS['crypto']['diffiehellman_limit']);
+		$shared = substr(base64_encode($shared), 0, 16);
+		Save_Shared($conn, $shared, $account_id);
+		return $pub_server;
+}
 
 function Save_Shared($conn, $key, $account_id){
         $ecb = new AES_128_ECB($GLOBALS['crypto']['server_aes']);
