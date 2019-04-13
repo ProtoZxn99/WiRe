@@ -25,10 +25,11 @@ function ValidateUser($conn, $account_id, $account_password){
             include '_footer.php';
         }
         else{
-            $query_key = mysqli_query($conn, "SELECT account_key as chat_key FROM account where account_id = '".$account_id."';");
+            $query_key = mysqli_query($conn, "SELECT account_key as chat_key FROM account where account_id = ".$account_id.";");
             $exec_key = mysqli_fetch_array($query);
             if($exec_key['chat_key']!=null){
-                return $exec_key['chat_key'];
+                $ecb = new AES_128_ECB($GLOBALS['server']['server_aes']);
+                return $ecb->decrypt($exec_key['chat_key']);
             }
             else{
                 echo $GLOBALS['error']["id_fail"];
