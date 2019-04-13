@@ -13,7 +13,15 @@ if(strlen($exec['block']) > 0){
     if($exec['block']<1){
         if($exec['used']<1){
             $query = mysqli_query($conn, "update set account_use = 1 where account_id = ".$exec['id'].";");
-            echo $exec['id'];
+            
+            $base_key = substr(md5($account_email),0,16);
+            $iv = substr(md5($account_password),0,16);
+            
+            $cbc = new AES_128_CBC($base_key, $iv);
+                    
+            $eid = $cbc->encrypt($exec['id']);
+            
+            echo $eid;
         }
         else{
             echo $GLOBALS['error']['id_use'];
