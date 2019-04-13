@@ -79,7 +79,7 @@ CREATE TABLE `authority` (
 DROP TABLE IF EXISTS `confirmation`;
 CREATE TABLE `confirmation` (
   `confirmation_email` varchar(100) NOT NULL DEFAULT '',
-  `account_pass` varchar(100) NOT NULL DEFAULT '',
+  `account_password` varchar(100) NOT NULL DEFAULT '',
   PRIMARY KEY (`confirmation_email`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
