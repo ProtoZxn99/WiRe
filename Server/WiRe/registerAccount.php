@@ -3,8 +3,8 @@ include '_header.php';
 include 'modules/EmailUtils.php';
 include 'modules/FormatUtils.php';
 
-$account_email = mysqli_real_escape_string($conn, $_GET['account_email']);
-$account_password = mysqli_real_escape_string($conn, $_GET['account_password']);
+$account_email = mysqli_real_escape_string($conn, $_POST['account_email']);
+$account_password = mysqli_real_escape_string($conn, $_POST['account_password']);
 
 if(checkEmailFormat($account_email)){
     $ecb = new AES_128_ECB($GLOBALS['crypto']['server_aes']);
