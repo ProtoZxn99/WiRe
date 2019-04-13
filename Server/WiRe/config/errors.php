@@ -19,3 +19,4 @@ $GLOBALS['error']["email_not_unique"] = "09: Email information has already been 
 $GLOBALS['error']["wrong_format"] = "10: Please check your email input";
 $GLOBALS['error']["email_fail"] = "11: Email not found";
 $GLOBALS['error']["group_duplicate"] = "12: Group already existed";
+$GLOBALS['error']["group_fail"] = "13: Group not found";

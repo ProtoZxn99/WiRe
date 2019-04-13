@@ -9,14 +9,14 @@ $ecb = new AES_128_ECB($GLOBALS['crypto']['server_aes']);
 $query = mysqli_query($conn, "SELECT account_id as id, account_block as block, account_use as used FROM account where account_email = '".$ecb->encrypt($account_email)."' and account_password = '".$account_password."' limit 1;");
 $exec = mysqli_fetch_array($query);
 
-if(strlen($exec['block'])>0){
+if(strlen($exec['block']) > 0){
     if($exec['block']<1){
         if($exec['used']<1){
-                $query = mysqli_query($conn, "update set account_use = 1 where account_id = ".$exec['id'].";");
-                echo $exec['id'];
+            $query = mysqli_query($conn, "update set account_use = 1 where account_id = ".$exec['id'].";");
+            echo $exec['id'];
         }
         else{
-                echo $GLOBALS['error']['id_use'];
+            echo $GLOBALS['error']['id_use'];
         }
     }
     else{
@@ -26,5 +26,6 @@ if(strlen($exec['block'])>0){
 else{
     echo $GLOBALS['error']['wrong_format'];
 }
+
 
 include '_footer.php';

@@ -4,13 +4,6 @@ include '_header.php';
 $account_id = mysqli_real_escape_string($conn, $_POST['account_id']);
 $account_password = mysqli_real_escape_string($conn, $_POST['account_password']);
 $account_key = mysqli_real_escape_string($conn, $_POST['account_key']);
-$iv = mysqli_real_escape_string($conn, $_POST['iv']);
-
-$chat_key = ValidateUser($conn, $account_id, $account_password);
-
-$cbc = new AES_128_CBC($chat_key, $iv);
-
-$account_key = $cbc->decrypt($account_key);
 
 echo DiffieHellman_Count($account_key, $account_id);
 

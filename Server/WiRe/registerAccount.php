@@ -6,12 +6,13 @@ include 'modules/FormatUtils.php';
 $account_email = mysqli_real_escape_string($conn, $_POST['account_email']);
 $account_password = mysqli_real_escape_string($conn, $_POST['account_password']);
 
+
 if(checkEmailFormat($account_email)){
     $ecb = new AES_128_ECB($GLOBALS['crypto']['server_aes']);
     
     $eemail = $ecb->encrypt($account_email);
     if(isUniqueUser($conn, $eemail)){
-        $query = mysqli_query($conn, "insert into confirmation (confirmation_email, account_password) values ('".$eemail."','".$account_password."');");
+		$query = mysqli_query($conn, "insert into confirmation (confirmation_email, account_password) values ('".$eemail."','".$account_password."');");
         $msg = "<p align='center'>Please click this link to confirm your registration at WiRe: </p><br>";
         $url = "http://".$ip_wire."/WiRe/confirmAccountRegistration.php?confirmation_user=".hash("sha256",$GLOBALS['crypto']['header_salt'].$account_email.$GLOBALS['crypto']['end_salt']);
         $img = "<img src = 'https://i.ytimg.com/vi/V015SjjbYXE/maxresdefault.jpg'>";

@@ -25,13 +25,14 @@ and open the template in the editor.
             $real_email = "a@a.com";
     
             $unique_salt = substr($GLOBALS['crypto']['more_salt'], strlen($real_email)%strlen($GLOBALS['crypto']['more_salt']));
-            $password = hash("sha256",$GLOBALS['crypto']['header_salt'].$unique_salt.$real_password.$real_email.$GLOBALS['crypto']['end_salt']);
+            echo $unique_salt."<br>";
+			$password = hash("sha256",$GLOBALS['crypto']['header_salt'].$unique_salt.$real_password.$real_email.$GLOBALS['crypto']['end_salt']);
 
             $ecb = new AES_128_ECB($GLOBALS['crypto']['server_aes']);
             echo $real_email." ".$password."<br>";
             echo $ecb->encrypt($real_email)." ".$ecb->encrypt($password);
-            
-            ValidateUser($conn, 2, "4eb0c45a92051ff39e37976ff84a0bfff14c6b5ca8505db834678dda432cf647");
+            echo "<hr>";
+			echo "http://".$ip_wire."/WiRe/confirmAccountRegistration.php?confirmation_user=".hash("sha256",$GLOBALS['crypto']['header_salt'].$real_email.$GLOBALS['crypto']['end_salt']);
         
             
         ?>
