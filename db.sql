@@ -32,7 +32,7 @@ CREATE TABLE `account` (
   `account_block` tinyint(1) NOT NULL DEFAULT '0',
   `account_wifi_ssid` varchar(32) DEFAULT NULL,
   `account_wifi_password` varchar(64) DEFAULT NULL,
-  `account_key` varchar(16) NOT NULL DEFAULT '',
+  `account_key` varchar(64) NOT NULL DEFAULT 'E5dGR8ezBb+x4q2I0gJZHs5ricRoqLIwbis3fRqp6FM=',
   `account_email` varchar(100) NOT NULL DEFAULT '',
   `account_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `account_use` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -44,9 +44,6 @@ CREATE TABLE `account` (
 --
 
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` (`account_id`,`account_password`,`account_block`,`account_wifi_ssid`,`account_wifi_password`,`account_key`,`account_email`,`account_time`,`account_use`) VALUES 
- (1,'mE6eq4lQmg6QRWT+Pt8C9VGVneYOkBW3xzP2RWT5gwG5T0JTKprvO0WkgnXS5CKJ',0,'c','ABCabc123ZXCzxc','','0aVjQWFx2txQpiGGhWQquboSH+oLjOWi2w45jI1BK4aCAFf7b0pcg4jXznpCq3lp','0000-00-00 00:00:00',0),
- (2,'4eb0c45a92051ff39e37976ff84a0bfff14c6b5ca8505db834678dda432cf647',0,'1ja6PhSigN1MGTpb1L4cxw==','iJfdYfcp1zA1bFFk7Ahxdg==','','gUr+OY+sqcjoiL8Ffr9LUQ==','0000-00-00 00:00:00',0);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 
 
@@ -111,21 +108,6 @@ CREATE TABLE `device` (
 --
 
 /*!40000 ALTER TABLE `device` DISABLE KEYS */;
-INSERT INTO `device` (`device_id`,`device_state`,`device_name`,`account_id`) VALUES 
- ('CC:50:E3:C7:64:3C-0',0,'',2),
- ('CC:50:E3:C7:64:3C-5',0,'',2),
- ('DC:4F:22:4C:74:50-0',0,'',2),
- ('DC:4F:22:4C:74:50-12',0,'',2),
- ('DC:4F:22:4C:74:50-13',0,'',2),
- ('DC:4F:22:4C:74:50-14',0,'',2),
- ('DC:4F:22:4C:74:50-15',0,'',2),
- ('DC:4F:22:4C:74:50-16',0,'',2),
- ('DC:4F:22:4C:74:50-2',0,'',2),
- ('DC:4F:22:4C:74:50-4',0,'',2),
- ('DC:4F:22:4C:74:50-5',0,'',2),
- ('IDDEVICE',0,'NAMADEVICE',2),
- ('IDDEVICE2',0,'NAMADEVICE',2),
- ('IDDEVICE3',0,'NAMADEVICE',2);
 /*!40000 ALTER TABLE `device` ENABLE KEYS */;
 
 
@@ -148,9 +130,6 @@ CREATE TABLE `grouping` (
 --
 
 /*!40000 ALTER TABLE `grouping` DISABLE KEYS */;
-INSERT INTO `grouping` (`grouping_name`,`grouping_id`,`account_id`) VALUES 
- ('a',1,NULL),
- ('b',2,NULL);
 /*!40000 ALTER TABLE `grouping` ENABLE KEYS */;
 
 
@@ -173,10 +152,6 @@ CREATE TABLE `member` (
 --
 
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` (`grouping_id`,`device_id`) VALUES 
- (1,'IDDEVICE'),
- (2,'IDDEVICE2'),
- (1,'IDDEVICE3');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 
 
@@ -209,10 +184,6 @@ CREATE TABLE `timer` (
 --
 
 /*!40000 ALTER TABLE `timer` DISABLE KEYS */;
-INSERT INTO `timer` (`timer_id`,`timer_start`,`timer_state`,`timer_d0`,`timer_d1`,`timer_d2`,`timer_d3`,`timer_d4`,`timer_d5`,`timer_d6`,`grouping_id`,`timer_name`,`timer_action`) VALUES 
- (1,'22:32:00',1,1,0,0,0,0,0,0,1,'ta',0),
- (2,'22:32:00',1,1,0,0,0,0,0,0,1,'ta',0),
- (3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'tb',0);
 /*!40000 ALTER TABLE `timer` ENABLE KEYS */;
 
 
@@ -233,9 +204,6 @@ CREATE TABLE `traffic` (
 --
 
 /*!40000 ALTER TABLE `traffic` DISABLE KEYS */;
-INSERT INTO `traffic` (`traffic_ip`,`account_id`,`traffic_block`) VALUES 
- ('\0ûºéUŽºý!)B…«Ç',1,0),
- ('....',0,0);
 /*!40000 ALTER TABLE `traffic` ENABLE KEYS */;
 
 
@@ -256,15 +224,6 @@ CREATE TABLE `traffic_detail` (
 --
 
 /*!40000 ALTER TABLE `traffic_detail` DISABLE KEYS */;
-INSERT INTO `traffic_detail` (`traffic_ip`,`traffic_time`) VALUES 
- ('....','2019-02-22 18:44:11'),
- ('....','2019-02-22 18:44:14'),
- ('....','2019-02-22 18:44:15'),
- ('....','2019-02-22 18:44:15'),
- ('....','2019-02-22 18:44:15'),
- ('....','2019-02-22 18:44:15'),
- ('....','2019-02-22 18:44:16'),
- ('....','2019-02-22 18:44:16');
 /*!40000 ALTER TABLE `traffic_detail` ENABLE KEYS */;
 
 

@@ -14,7 +14,7 @@ if(checkEmailFormat($account_email)){
     if(isUniqueUser($conn, $eemail)){
 		$query = mysqli_query($conn, "insert into confirmation (confirmation_email, account_password) values ('".$eemail."','".$account_password."');");
         $msg = "<p align='center'>Please click this link to confirm your registration at WiRe: </p><br>";
-        $url = "http://".$ip_wire."/WiRe/confirmAccountRegistration.php?confirmation_email=".hash("sha256",$GLOBALS['crypto']['header_salt'].$account_email.$GLOBALS['crypto']['end_salt']);
+        $url = "http://".$ip_wire."/WiRe/confirmAccountRegistration.php?confirmation_user=".hash("sha256",$GLOBALS['crypto']['header_salt'].$account_email.$GLOBALS['crypto']['end_salt']);
         $img = "<img src = 'https://i.ytimg.com/vi/V015SjjbYXE/maxresdefault.jpg'>";
         sendeMail("wire@noreply.com", $account_email, "Confirming WiRe account registration", $msg."<a href ='".$url."'>".$img."</a>");
         echo 1;
