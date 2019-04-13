@@ -15,7 +15,7 @@ $cbc = new AES_128_CBC($base_key, $iv);
 
 $dummy_id = $cbc->decrypt($dummy_id);
 
-if(dummy_id!=account_id){
+if($dummy_id!=$account_id){
     echo $GLOBALS['error']["id_fail"];
     include '_footer.php';
 }
