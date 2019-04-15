@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modules;
+package com.stts.coba;
 
+import android.util.Base64;
+
+import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 
 import javax.crypto.Cipher;
@@ -36,7 +39,7 @@ private Cipher cipher;
     }
     
     public String encrypt(String text) throws Exception{
-        return this.bytesToHex( this.byteencrypt(text));
+        return Base64.encodeToString(this.byteencrypt(text),Base64.DEFAULT);
     }
     
     public byte[] byteencrypt(String text) throws Exception
@@ -59,12 +62,13 @@ private Cipher cipher;
     }
 
     public String decrypt(String text) throws Exception{
-        return new String(this.bytedecrypt(text));
+        return new String(this.bytedecrypt(Base64.decode(text, Base64.DEFAULT)));
+        //return new String(this.bytedecrypt(Base64.decode(text.getBytes(StandardCharsets.UTF_8), Base64.DEFAULT)),StandardCharsets.UTF_8);
     }
     
-    public byte[] bytedecrypt(String code) throws Exception
+    public byte[] bytedecrypt(byte [] code) throws Exception
     {
-            if(code == null || code.length() == 0)
+            if(code == null)
                     throw new Exception("Empty string");
 
             byte[] decrypted = null;
@@ -72,7 +76,10 @@ private Cipher cipher;
             try {
                     cipher.init(Cipher.DECRYPT_MODE, keyspec, ivspec);
 
-                    decrypted = cipher.doFinal(hexToBytes(code));
+                    decrypted = cipher.doFinal(code);
+
+                    decrypted = trim(decrypted);
+
             } catch (Exception e)
             {
                     throw new Exception("[decrypt] " + e.getMessage());
@@ -80,54 +87,33 @@ private Cipher cipher;
             return decrypted;
     }
 
+    public byte[] trim(byte [] bytes){
+        if( bytes.length > 0)
+        {
+            int trim = 0;
+            for( int i = bytes.length - 1; i >= 0; i-- ) if( bytes[i] == 0 ) trim++;
 
-
-    public static String bytesToHex(byte[] data)
-    {
-            if (data==null)
+            if( trim > 0 )
             {
-                    return null;
+                byte[] newArray = new byte[bytes.length - trim];
+                System.arraycopy(bytes, 0, newArray, 0, bytes.length - trim);
+                bytes = newArray;
             }
-
-            int len = data.length;
-            String str = "";
-            for (int i=0; i<len; i++) {
-                    if ((data[i]&0xFF)<16)
-                            str = str + "0" + java.lang.Integer.toHexString(data[i]&0xFF);
-                    else
-                            str = str + java.lang.Integer.toHexString(data[i]&0xFF);
-            }
-            return str;
+        }
+        return bytes;
     }
 
 
-    public static byte[] hexToBytes(String str) {
-            if (str==null) {
-                    return null;
-            } else if (str.length() < 2) {
-                    return null;
-            } else {
-                    int len = str.length() / 2;
-                    byte[] buffer = new byte[len];
-                    for (int i=0; i<len; i++) {
-                            buffer[i] = (byte) Integer.parseInt(str.substring(i*2,i*2+2),16);
-                    }
-                    return buffer;
-            }
-    }
-
-
-
-    private static String padString(String source)
+    private String padString(String source)
     {
-      char paddingChar = 0;
+      char paddingChar = '0';
       int size = 16;
       int x = source.length() % size;
       int padLength = size - x;
 
       for (int i = 0; i < padLength; i++)
       {
-              source += paddingChar;
+              source = paddingChar + source;
       }
 
       return source;
