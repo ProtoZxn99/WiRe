@@ -28,6 +28,9 @@ function DiffieHellman_Count($conn, $pub_client, $account_id){
 		$pri_server = RandomInt($GLOBALS['crypto']['diffiehellman_length']);
 		$pub_server = bcpowmod($GLOBALS['crypto']['diffiehellman_base'],$pri_server,$GLOBALS['crypto']['diffiehellman_limit']);
 		$shared = bcpowmod($pub_client,$pri_server,$GLOBALS['crypto']['diffiehellman_limit']);
+		while (strlen($shared)<16){
+			$shared = "0".$shared;
+		}
 		$shared = substr(base64_encode($shared), 1, 16);
 		Save_Shared($conn, $shared, $account_id);
 		return $pub_server;
