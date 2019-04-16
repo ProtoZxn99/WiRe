@@ -13,8 +13,8 @@ $GLOBALS['crypto']['end_salt'] = " sprinkled with more Sodium chloride and a lit
 
 $GLOBALS['crypto']['xor_mac_key'] = "ConcealM4CtoHackers";
 
-$GLOBALS['crypto']['diffiehellman_length'] = 64;
-$GLOBALS['crypto']['diffiehellman_base'] = "1371531631272555111023204740958191409520471023511255127633115731";
-$GLOBALS['crypto']['diffiehellman_limit'] = "6260585756555452515049484645444240393836353433323028272625242221";
+$GLOBALS['crypto']['diffiehellman_length'] = 16;
+$GLOBALS['crypto']['diffiehellman_base'] = "2035802523820057";
+$GLOBALS['crypto']['diffiehellman_limit'] = "9999999900000001";
 
 $GLOBALS['crypto']['server_aes'] = "QSAa8XN8rQJTYWTX";
