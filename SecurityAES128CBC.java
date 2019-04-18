@@ -23,12 +23,12 @@ private Cipher cipher;
 
     public SecurityAES128CBC(String key, String iv)
     {
-            ivspec = new IvParameterSpec(iv.getBytes());
+            ivspec = new IvParameterSpec(iv.getBytes(StandardCharsets.UTF_8));
 
-            keyspec = new SecretKeySpec(key.getBytes(), "AES");
+            keyspec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES");
 
             try {
-                    cipher = Cipher.getInstance("AES/CBC/NoPadding");
+                    cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             } catch (NoSuchAlgorithmException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -52,10 +52,11 @@ private Cipher cipher;
             try {
                     cipher.init(Cipher.ENCRYPT_MODE, keyspec, ivspec);
 
-                    encrypted = cipher.doFinal(padString(text).getBytes());
+                encrypted = cipher.doFinal(text.getBytes(StandardCharsets.UTF_8));
+                //encrypted = cipher.doFinal(padString(text).getBytes(StandardCharsets.UTF_8));
             } catch (Exception e)
-            {			
-                    throw new Exception("[encrypt] " + e.getMessage());
+            {
+                throw new Exception("[encrypt] " + e.getMessage());
             }
 
             return encrypted;
@@ -78,7 +79,7 @@ private Cipher cipher;
 
                     decrypted = cipher.doFinal(code);
 
-                    decrypted = trim(decrypted);
+                    //decrypted = trim(decrypted);
 
             } catch (Exception e)
             {
@@ -87,35 +88,35 @@ private Cipher cipher;
             return decrypted;
     }
 
-    public byte[] trim(byte [] bytes){
-        if( bytes.length > 0)
-        {
-            int trim = 0;
-            for( int i = bytes.length - 1; i >= 0; i-- ) if( bytes[i] == 0 ) trim++;
-
-            if( trim > 0 )
-            {
-                byte[] newArray = new byte[bytes.length - trim];
-                System.arraycopy(bytes, 0, newArray, 0, bytes.length - trim);
-                bytes = newArray;
-            }
-        }
-        return bytes;
-    }
-
-
-    private String padString(String source)
-    {
-      char paddingChar = '0';
-      int size = 16;
-      int x = source.length() % size;
-      int padLength = size - x;
-
-      for (int i = 0; i < padLength; i++)
-      {
-              source = paddingChar + source;
-      }
-
-      return source;
-    }
+//    public byte[] trim(byte [] bytes){
+//        if( bytes.length > 0)
+//        {
+//            int trim = 0;
+//            for( int i = bytes.length - 1; i >= 0; i-- ) if( bytes[i] == 0 ) trim++;
+//
+//            if( trim > 0 )
+//            {
+//                byte[] newArray = new byte[bytes.length - trim];
+//                System.arraycopy(bytes, 0, newArray, 0, bytes.length - trim);
+//                bytes = newArray;
+//            }
+//        }
+//        return bytes;
+//    }
+//
+//
+//    private String padString(String source)
+//    {
+//      char paddingChar = '0';
+//      int size = 16;
+//      int x = source.length() % size;
+//      int padLength = size - x;
+//
+//      for (int i = 0; i < padLength; i++)
+//      {
+//              source = paddingChar + source;
+//      }
+//
+//      return source;
+//    }
   }
