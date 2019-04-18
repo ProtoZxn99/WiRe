@@ -11,7 +11,7 @@ $base_key = substr(md5($account_id), 0, 16);
 
 $cbc = new AES_128_CBC($base_key, $iv);
 
-$dummy_id = $cbc->decrypt($dummy_id);
+$dummy_id = (int) $cbc->decrypt($dummy_id);
 
 if($dummy_id!=$account_id){
     echo $GLOBALS['error']["id_fail"];
