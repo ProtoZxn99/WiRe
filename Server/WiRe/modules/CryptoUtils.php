@@ -109,7 +109,9 @@ class AES_128_CBC
 
       //$key = $this->hex2bin($key);
         $iv = $this->iv;
-
+        
+        $str = $this->pkcs5_pad($str, 16);
+        
         $td = mcrypt_module_open('rijndael-128', '', 'cbc', $iv);
 
         mcrypt_generic_init($td, $this->key, $iv);
@@ -133,9 +135,39 @@ class AES_128_CBC
 
         mcrypt_generic_deinit($td);
         mcrypt_module_close($td);
-
-        return utf8_encode(trim($decrypted));
+	
+        //$decrypted = $this->pkcs5_unpad($decrypted);
+		return $this->force_unpad($decrypted);
     }
+    
+    function force_unpad($Str) {  
+    $StrArr = str_split($Str); $NewStr = '';
+    
+    foreach ($StrArr as $Char) {    
+      $CharNo = ord($Char);
+      if ($CharNo > 31 && $CharNo < 127) {
+        $NewStr .= $Char; 
+      }
+      else{
+          break;
+      }
+    }  
+    return $NewStr;
+  }
+
+    function pkcs5_pad ($text, $blocksize) 
+    { 
+        $pad = $blocksize - (strlen($text) % $blocksize); 
+        return $text . str_repeat(chr($pad), $pad); 
+    } 
+
+//    function pkcs5_unpad($text) 
+//    { 
+//        $pad = ord($text{strlen($text)-1}); 
+//        if ($pad > strlen($text)) return $text; 
+//        if (strspn($text, chr($pad), strlen($text) - $pad) != $pad) return $text; 
+//        return substr($text, 0, -1 * $pad); 
+//   } 
 }
     
 class RSA
