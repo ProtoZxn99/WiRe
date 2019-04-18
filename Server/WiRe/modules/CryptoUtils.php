@@ -137,7 +137,7 @@ class AES_128_CBC
         mcrypt_module_close($td);
 	
         //$decrypted = $this->pkcs5_unpad($decrypted);
-		return $this->force_unpad($decrypted);
+	return $this->force_unpad($decrypted);
     }
     
     function force_unpad($Str) {  
