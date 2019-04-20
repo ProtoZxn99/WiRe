@@ -37,13 +37,15 @@ CREATE TABLE `account` (
   `account_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `account_use` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`account_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `account`
 --
 
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
+INSERT INTO `account` (`account_id`,`account_password`,`account_block`,`account_wifi_ssid`,`account_wifi_password`,`account_key`,`account_email`,`account_time`,`account_use`) VALUES 
+ (4,'4eb0c45a92051ff39e37976ff84a0bfff14c6b5ca8505db834678dda432cf647',0,'gUr+OY+sqcjoiL8Ffr9LUQ==',NULL,'8NGykpzMqSYIe48EJWv/ZM5ricRoqLIwbis3fRqp6FM=','gUr+OY+sqcjoiL8Ffr9LUQ==','2019-04-13 22:48:15',0);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 
 
@@ -123,7 +125,7 @@ CREATE TABLE `grouping` (
   PRIMARY KEY (`grouping_id`),
   KEY `FK_grouping_1` (`account_id`),
   CONSTRAINT `FK_grouping_1` FOREIGN KEY (`account_id`) REFERENCES `account` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `grouping`
@@ -177,7 +179,7 @@ CREATE TABLE `timer` (
   PRIMARY KEY (`timer_id`),
   KEY `FK_timer_1` (`grouping_id`) USING BTREE,
   CONSTRAINT `FK_timer_1` FOREIGN KEY (`grouping_id`) REFERENCES `grouping` (`grouping_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `timer`
@@ -194,7 +196,6 @@ CREATE TABLE `timer` (
 DROP TABLE IF EXISTS `traffic`;
 CREATE TABLE `traffic` (
   `traffic_ip` varchar(15) NOT NULL DEFAULT '',
-  `account_id` int(10) unsigned DEFAULT NULL,
   `traffic_block` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`traffic_ip`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -213,8 +214,9 @@ CREATE TABLE `traffic` (
 
 DROP TABLE IF EXISTS `traffic_detail`;
 CREATE TABLE `traffic_detail` (
-  `traffic_ip` varchar(15) NOT NULL,
+  `traffic_ip` varchar(15) NOT NULL DEFAULT '',
   `traffic_time` datetime NOT NULL,
+  `traffic_id` int(10) unsigned NOT NULL DEFAULT '0',
   KEY `FK_traffic_detail_1` (`traffic_ip`),
   CONSTRAINT `FK_traffic_detail_1` FOREIGN KEY (`traffic_ip`) REFERENCES `traffic` (`traffic_ip`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
