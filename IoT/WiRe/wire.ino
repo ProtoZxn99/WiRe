@@ -18,6 +18,7 @@ static const String server_key = "ConcealM4CtoHackers";
 static String encrypted_id;
 static String ssid_key;
 
+static uint8_t ledpin = D0;
 static uint8_t listpin [] = {D1,D2,D3,D4,D5,D6,D7,D8};
 
 static const int device_cooldown = 1000; //cooldown of each device cycle in milliseconds
@@ -34,13 +35,13 @@ void setup()
   Serial.begin(115200);
   generateSSIDKey();
   generateEncryptedID();
-  pinMode(D0,OUTPUT);
-  digitalWrite(D0,HIGH);
+  pinMode(ledpin,OUTPUT);
+  digitalWrite(ledpin,HIGH);
   for(int i = 0; i<sizeof(listpin); i++){
     pinMode(listpin[i],OUTPUT);
     digitalWrite(listpin[i],LOW);
   }
-  digitalWrite(D0,LOW);
+  digitalWrite(ledpin,LOW);
 }
 
 void generateSSIDKey(){
@@ -193,7 +194,7 @@ void connectWiFi(){
 void loop() {
   int cyclecounter = cycle_timeout;
   if(WiFi.status() != WL_CONNECTED){
-    digitalWrite(D0,HIGH);
+    digitalWrite(ledpin,HIGH);
     connectWiFi();
   }
   while(WiFi.status() != WL_CONNECTED && cyclecounter>0){
@@ -205,7 +206,7 @@ void loop() {
     if(device_cycle==0){
       UpdateWiFiInfo();
     }
-    digitalWrite(D0,LOW);
+    digitalWrite(ledpin,LOW);
     for(int i = 0; i<sizeof(listpin)/sizeof(int); i++){
       String state = HTTPGetRequest(server_url+"getDeviceState.php?device_id="+encrypted_id+"&device_pin="+listpin[i]);
        if(state.length()>1){
