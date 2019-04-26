@@ -55,7 +55,6 @@ void generateSSIDKey(){
 
 //Encrypts the MAC Address of the device, and store it in a global variable
 void generateEncryptedID(){
-  String id = WiFi.macAddress();
   String hmac_id = MD5_HMAC(WiFi.macAddress(),server_key,server_key); //Generates HMAC for the device's MAC Address
   encrypted_id = Base64_Encode(XOR_Encrypt(hmac_id+WiFi.macAddress(),server_key)); //Generates a formatted MAC Address to be used in communication with web service.
 }
