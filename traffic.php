@@ -45,7 +45,7 @@ function checkIP(){
     }
     $query_check = mysqli_query($conn, "select count(*) as traffic from traffic_detail where traffic_ip = ".$ip." and traffic_time > date_sub(now(), interval ".$GLOBALS['traffic']['time']." second);");
     $count = mysqli_fetch_array($query_check);
-    if($count['traffic']>$GLOBALS['traffic']['limit']*$GLOBALS['traffic']['max']){
+    if($count['traffic']>=$GLOBALS['traffic']['limit']*$GLOBALS['traffic']['max']-1){
         $query_block = mysqli_query($conn, "update traffic set traffic_block = 1 where traffic_ip = ".$ip.";");
         echo $GLOBALS['error']['traffic_busy'];
         include '_footer.php';
