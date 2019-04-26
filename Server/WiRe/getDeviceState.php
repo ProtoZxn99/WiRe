@@ -1,6 +1,5 @@
 <?php
 include '_header.php';
-include 'modules/CryptoUtils.php';
 
 $device_id = mysqli_real_escape_string($conn, XOR_Encrypt(base64_decode($_GET['device_id']),$GLOBALS['crypto']['xor_mac_key']));
 $device_pin = mysqli_real_escape_string($conn, $_GET['device_pin']);
