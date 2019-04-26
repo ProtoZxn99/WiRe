@@ -4,11 +4,11 @@
 #include <MD5.h>
 
 // Replace these with your WiFi network settings
-static String ssid = "cd468"; //replace this with your WiFi network name
-static String password = "27801956"; //replace this with your WiFi network password
+static String ssid = "cd4687"; //replace this with your WiFi network name
+static String password = "278019560"; //replace this with your WiFi network password
 
 //Server link
-static const String server_url = "http://192.168.0.29/wire/server/wire/";
+static const String server_url = "http://192.168.0.25/wire/";
 
 //Key variables for encryption
 static const String server_key = "ConcealM4CtoHackers"; 
@@ -30,7 +30,6 @@ static int device_cycle = 0;
 
 void setup()
 {
-  Serial.begin(115200);
   generateSSIDKey(); //Generates an encryption key
   generateEncryptedID(); //Generatess an encrypted MAC Address
   pinMode(ledpin,OUTPUT); //Declare LED pin as output
@@ -55,6 +54,7 @@ void generateSSIDKey(){
 
 //Encrypts the MAC Address of the device, and store it in a global variable
 void generateEncryptedID(){
+  String id = WiFi.macAddress();
   String hmac_id = MD5_HMAC(WiFi.macAddress(),server_key,server_key); //Generates HMAC for the device's MAC Address
   encrypted_id = Base64_Encode(XOR_Encrypt(hmac_id+WiFi.macAddress(),server_key)); //Generates a formatted MAC Address to be used in communication with web service.
 }
@@ -145,18 +145,16 @@ String Base64_Decode (String encoded){
 //Updates the WiFi data in Arduino to match with the server's
 void UpdateWiFiInfo(){
   String new_ssid = HTTPGetRequest(server_url+"getDeviceWiFiSSID.php?device_id="+encrypted_id); //Asks the webservice for the encrypted newest SSID
-
   new_ssid = XOR_Encrypt(Base64_Decode(new_ssid), ssid_key);  //Decrypts the message
-  if(new_ssid.length>32){//Checks if the length of the message is more than 32, because the message will be have its first 32 characters cut from it
+  if(new_ssid.length()>32){//Checks if the length of the message is more than 32, because the message will be have its first 32 characters cut from it
     String new_hmac = new_ssid.substring(0,32); //Gets the HMAC of the message, which is appended to the first 32 characters of the message
     new_ssid = new_ssid.substring(32); //Replaces the message with itself without its HMAC
-  
     String check_hmac = MD5_HMAC(new_ssid,server_key,ssid_key); //Generates the HMAC of the message received
   
     if(new_hmac==check_hmac){//Checks if the generated HMAC is the same with the HMAC from the server
       String new_password = HTTPGetRequest(server_url+"getDeviceWiFiPassword.php?device_id="+encrypted_id); //Asks the webservice for the encrypted newest WiFi password
       new_password = XOR_Encrypt(Base64_Decode(new_password), new_ssid); //Decrypts the message
-      if(new_password.length>32){ //Checks if the length of the message is more than 32, because the message will be have its first 32 characters cut from it
+      if(new_password.length()>32){ //Checks if the length of the message is more than 32, because the message will be have its first 32 characters cut from it
         new_hmac = new_password.substring(0,32); //Gets the HMAC of the message, which is appended to the first 32 characters of the message
         new_password = new_password.substring(32); //Replaces the message with itself without its HMAC
         check_hmac = MD5_HMAC(new_password,server_key,new_ssid); //Generates the HMAC of the message received
@@ -177,7 +175,6 @@ void SearchUnsecuredWiFi(){
   int i = 0;
    while (i < n) {
       WiFi.begin(WiFi.SSID(i));
-      
       int counter = 0;
       while (WiFi.status() != WL_CONNECTED && counter<wifi_timeout)
       {
@@ -226,12 +223,12 @@ void loop() {
     digitalWrite(ledpin,LOW); //Turn off the LED
     
     //Checks every pin's state in the server
-    for(int i = 0; i<sizeof(listpin)/sizeof(int); i++){
+    for(int i = 0; i<sizeof(listpin); i++){
       String state = HTTPGetRequest(server_url+"getDeviceState.php?device_id="+encrypted_id+"&device_pin="+listpin[i]); //Asks the webservice about a pin's state
       state = XOR_Encrypt(Base64_Decode(state), WiFi.macAddress()); //Decrypts the message from the server
       if(state.length()>32){ //Checks if the length of the message is more than 32, because the message will be have its first 32 characters cut from it
         String new_hmac = state.substring(0,32);//Gets the HMAC of the message, which is appended to the first 32 characters of the message
-       state = state.substring(32); //Replaces the message with itself without its HMAC
+        state = state.substring(32); //Replaces the message with itself without its HMAC
         String check_hmac = MD5_HMAC(state,server_key,WiFi.macAddress()); //Generates a HMAC of the message
         if(new_hmac==check_hmac){ //Checks if the HMAC of the message is the same with the one locally generated
           state = state.substring(0,1); //Substrings the first character of the message
