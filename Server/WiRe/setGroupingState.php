@@ -14,11 +14,7 @@ $cbc = new AES_128_CBC($chat_key, $iv);
 $grouping_name = $cbc->decrypt(grouping_name);
 $device_state = $cbc->decrypt($device_state);
 
-$query = mysqli_query($conn, "SELECT device_id as id FROM device where device_id in (select device_id from member where grouping_id = ".$grouping_id.");");
-
-while($exec = mysqli_fetch_array($query)){
-    $update = mysqli_query($conn, "update device set device_state = ".$device_state." where device_id = '".$exec['id']."';");
-}
+$query = mysqli_query($conn, "update device set device_state = ".$device_state." where device_id in (select device_id from member where grouping_id = ".$grouping_id.");");
 
 echo 1;
 

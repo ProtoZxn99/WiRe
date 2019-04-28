@@ -13,6 +13,9 @@
             {
                 document.getElementsByClassName(inputid).value = text.substring(0,str.length-1);
             }
+			else{
+				document.getElementsByClassName(inputid).value = "";
+			}
         }
         function validateForm() {
             var password = document.forms["reset_form"]["account_password"].value;

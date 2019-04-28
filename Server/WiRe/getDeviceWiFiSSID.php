@@ -11,19 +11,25 @@ if(MD5_HMAC($device_id, $GLOBALS['crypto']['xor_mac_key'], $GLOBALS['crypto']['x
     include '_footer.php';
 }
 
-$query = mysqli_query($conn, "select a.account_wifi_ssid as ssid from account a, device d where a.account_id = d.account_id and d.device_id = '".$device_id."-0' limit 1;");
+$query = mysqli_query($conn, "select a.account_wifi_ssid as ssid from account a, device d where a.account_id = d.account_id and d.device_id = '".$device_id."-5' limit 1;");
 $exec = mysqli_fetch_array($query);
 
-$ecb = new AES_128_ECB($GLOBALS['crypto']['server_aes']);
+if(isset($exec['ssid'])){
+	$ecb = new AES_128_ECB($GLOBALS['crypto']['server_aes']);
 
-$ssid = $ecb->decrypt($exec['ssid']);
+	$ssid = $ecb->decrypt($exec['ssid']);
 
-$mac = substr($device_id, 0, 17);
+	$mac = substr($device_id, 0, 17);
 
-$ssid_key = generateSSIDKey($mac);
-$essid = base64_encode(XOR_Encrypt(MD5_HMAC($ssid, $GLOBALS['crypto']['xor_mac_key'], $ssid_key).$ssid, $ssid_key));
+	$ssid_key = generateSSIDKey($mac);
+	$essid = base64_encode(XOR_Encrypt(MD5_HMAC($ssid, $GLOBALS['crypto']['xor_mac_key'], $ssid_key).$ssid, $ssid_key));
 
-echo $essid;
+	echo $essid;
+}
+else{
+	echo 0;
+}
+
 
 
 include '_footer.php';
