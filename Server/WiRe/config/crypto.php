@@ -18,3 +18,5 @@ $GLOBALS['crypto']['diffiehellman_base'] = "2035802523820057";
 $GLOBALS['crypto']['diffiehellman_limit'] = "9999999900000001";
 
 $GLOBALS['crypto']['server_aes'] = "QSAa8XN8rQJTYWTX";
+
+$GLOBALS['crypto']['device_aes'] = "iL39tLaPTna08Wz1";

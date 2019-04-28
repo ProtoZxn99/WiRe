@@ -12,7 +12,11 @@ $cbc = new AES_128_CBC($chat_key, $iv);
 
 $device_id = $cbc->decrypt($device_id);
 
-$query = mysqli_query($conn, "update into device set account_id = ".$account_id." where device_id like '".$device_id."-%';");
+$ecb = new AES_128_ECB($GLOBALS['crypto']['device_aes']);
+
+$device_id = $ecb->encrypt($device_id);
+
+$query = mysqli_query($conn, "update into device set account_id = ".$account_id." where device_id = '".$device_id."-%';");
 
 echo 1;
 

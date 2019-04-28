@@ -14,7 +14,9 @@ and open the template in the editor.
         <?php
             
             include "_header.php";
-
+			$ecb = new AES_128_ECB($GLOBALS['crypto']['server_aes']);
+            echo $ecb->encrypt("cd4687")." ".$ecb->encrypt("278019560")."<br>";
+/*
             $real_password = "a";
             $real_email = "a@a.com";
     
@@ -118,7 +120,7 @@ else{
                 $query = mysqli_query($conn, "update account set account_key = '".$key."' where account_id = ".$account_id.";");
                 
         }
-
+*/
         ?>
     </body>
 </html>

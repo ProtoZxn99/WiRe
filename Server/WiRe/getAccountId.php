@@ -12,7 +12,7 @@ $exec = mysqli_fetch_array($query);
 if(strlen($exec['block']) > 0){
     if($exec['block']<1){
         if($exec['used']<1){
-            $query = mysqli_query($conn, "update account set account_use = 1 where account_id = ".$exec['id'].";");
+            //$query = mysqli_query($conn, "update account set account_use = 1 where account_id = ".$exec['id'].";");
             
             $base_key = substr(md5($account_email),0,16);
             $iv = substr(md5($account_password),0,16);

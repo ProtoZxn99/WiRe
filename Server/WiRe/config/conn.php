@@ -18,7 +18,7 @@ function ValidateUser($conn, $account_id, $account_password){
     
     $query = mysqli_query($conn, "SELECT account_block as authority FROM account where account_id = '".$account_id."' and account_password = '".$account_password."';");
     $exec = mysqli_fetch_array($query);
-    if(strlen($exec['authority'])>0){
+    if(isset($exec['authority'])){
         if($exec['authority']>0){
             echo $GLOBALS['error']["id_block"];
             include '_footer.php';
