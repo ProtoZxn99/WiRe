@@ -19,7 +19,3 @@ else{
 }
 
 include '_footer.php';
-
-/*
-
-*/

@@ -16,8 +16,7 @@ $account_wifi_password = $cbc->decrypt($account_wifi_password);
 
 $ecb = new AES_128_ECB($GLOBALS['crypto']['server_aes']);
 
-$query = mysqli_query($conn, "update into account set account_wifi_ssid = '".$ecb->encrypt($account_wifi_ssid)."', account_wifi_password = '".$ecb->encrypt($account_wifi_password)."' where account_id = ".$account_id.";");
-$exec = mysqli_fetch_array($query);
+$query = mysqli_query($conn, "update account set account_wifi_ssid = '".$ecb->encrypt($account_wifi_ssid)."', account_wifi_password = '".$ecb->encrypt($account_wifi_password)."' where account_id = ".$account_id.";");
 
 echo 1;
 

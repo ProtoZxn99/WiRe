@@ -1,6 +1,7 @@
 <?php
 include '_header.php';
 
+$id = mysqli_real_escape_string($conn, $_POST['id']);
 $account_id = mysqli_real_escape_string($conn, $_POST['account_id']);
 $account_password = mysqli_real_escape_string($conn, $_POST['account_password']);
 $grouping_id = mysqli_real_escape_string($conn, $_POST['grouping_id']);
@@ -35,9 +36,20 @@ $timer_d4 = $cbc->decrypt($timer_d4);
 $timer_d5 = $cbc->decrypt($timer_d5);
 $timer_d6 = $cbc->decrypt($timer_d6);
 
-$query = mysqli_query($conn, "insert into timer (grouping_id, timer_name, timer_start, timer_action, timer_state, timer_d0, timer_d1, timer_d2, timer_d3, timer_d4, timer_d5, timer_d6) values ('"
+$qcek = mysqli_query($conn, "SELECT count(*) as jml FROM timer where timer_id = '".$id."';");
+$jml = mysqli_fetch_array($qcek)['jml'];
+if($jml > 0){
+	$query = mysqli_query($conn, "update timer set grouping_id = '".$grouping_id."', timer_name = '".$timer_name."', timer_start = '". $timer_start."'
+	, timer_action = '".$timer_action."', timer_state = '".$timer_state."' , timer_d0 = '".$timer_d0."', timer_d1 = '"
+	.$timer_d1."', timer_d2 = '".$timer_d2."', timer_d3 = '"
+	.$timer_d3."', timer_d4 = '".$timer_d4."', timer_d5 = '".$timer_d5."', timer_d6 = '".$timer_d6."' where timer_id = '".$id."';");
+		
+	echo $query;
+}else{
+	$query = mysqli_query($conn, "insert into timer (grouping_id, timer_name, timer_start, timer_action, timer_state, timer_d0, timer_d1, timer_d2, timer_d3, timer_d4, timer_d5, timer_d6) values ('"
 		.$grouping_id."','".$timer_name."','". $timer_start."',".$timer_action.",".$timer_state.",".$timer_d0.",".$timer_d1.",".$timer_d2.",".$timer_d3.",".$timer_d4.",".$timer_d5.",".$timer_d6.");");
 		
-echo $query;
+	echo $query;
+}	
 
 include '_footer.php';

@@ -12,7 +12,7 @@ $exec = mysqli_fetch_array($query);
 
 if($exec['users']>0){
     $msg = "<p align='center'>Please click this link to reset your password at WiRe: </p><br>";
-    $url = "http://".$ip_wire."/WiRe/FormAccountPasswordChange.php?account_email=".hash("sha256",$header_salt.$account_email.$end_salt);
+    $url = "http://".$ip_wire."/WiRe/FormAccountPasswordChange.php?account_email=".hash("sha256",$GLOBALS['crypto']['header_salt'].$account_email.$GLOBALS['crypto']['end_salt']);
     $img = "<img src = 'https://i.ytimg.com/vi/V015SjjbYXE/maxresdefault.jpg'>";
     $closure = "If you didn't remember applying for a password reset, you can leave this email alone.";
     sendeMail("wire@noreply.com", $account_email, "Reset WiRe Password", $msg."<a href ='".$url."'>".$img."</a>".$closure);

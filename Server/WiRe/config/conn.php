@@ -18,7 +18,7 @@ function ValidateUser($conn, $account_id, $account_password){
     
     $query = mysqli_query($conn, "SELECT account_block as authority FROM account where account_id = '".$account_id."' and account_password = '".$account_password."';");
     $exec = mysqli_fetch_array($query);
-    if(isset($exec['authority'])){
+    if(strlen($exec['authority'])>0){
         if($exec['authority']>0){
             echo $GLOBALS['error']["id_block"];
             include '_footer.php';
@@ -30,6 +30,7 @@ function ValidateUser($conn, $account_id, $account_password){
             if(strlen($exec_key['chat_key'])>0){
                 $ecb = new AES_128_ECB($GLOBALS['crypto']['server_aes']);
                 return $ecb->decrypt($exec_key['chat_key']);
+				//return $exec_key['chat_key'];
             }
             else{
                 echo $GLOBALS['error']["id_fail"];

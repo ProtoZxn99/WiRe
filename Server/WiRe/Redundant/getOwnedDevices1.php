@@ -1,11 +1,9 @@
 <?php
-include '_header.php';
-
+$conn = mysqli_connect("localhost", "root", "", "wire");
 $account_id = mysqli_real_escape_string($conn, $_POST['account_id']);
-//$account_id = 3;
 
 $result = array();
-$query = mysqli_query($conn, "select t.timer_id as id, t.timer_name as name, t.timer_state as state from timer t, grouping g where t.grouping_id = g.grouping_id and g.account_id = ".$account_id.";");
+$query = mysqli_query($conn, "select device_id as id, device_name as name, device_state as state from device where account_id = ".$account_id." and device_id not in(select device_id from member);");
 while($row = mysqli_fetch_array($query)){
 	array_push($result, array('id'=> $row['id'], 'name'=>$row['name'], 'state'=>$row['state']));
 }

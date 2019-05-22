@@ -1,9 +1,9 @@
 <?php
 $conn = mysqli_connect("localhost", "root", "", "wire");
-$device_id = $_POST['kode'];
+$id = $_POST['kode'];
 
 $result = array();
-$hapus = mysqli_query($conn, "delete from device where device_id = '".$device_id."';");
+$hapus = mysqli_query($conn, "delete from grouping where grouping_id = '".$id."';");
 if($hapus == 1){
 	array_push($result, array('status'=> "Item deleted"));
 }else{
