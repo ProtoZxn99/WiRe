@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_barang"
+        android:enabled="true"
+        android:icon="@drawable/ic_library_news_black_24dp"
+        android:title="Barang"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_antar"
+        android:enabled="true"
+        android:icon="@drawable/ic_shopping_cart_black_24dp"
+        android:title="Antar Barang"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_profile"
+        android:enabled="true"
+        android:icon="@drawable/ic_more_black_24dp"
+        android:title="Profile"
+        app:showAsAction="ifRoom" />
+</menu>

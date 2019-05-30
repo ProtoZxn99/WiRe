@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_centerInParent="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+
+                <RelativeLayout
+                    android:padding="@dimen/padding_input_left_right"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/photo"
+                        android:layout_width="match_parent"
+                        android:layout_height="140dp"
+                        android:src="@drawable/logo"
+                        app:srcCompat="@drawable/logo" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:paddingTop="@dimen/padding_input_left_right"
+                    android:paddingBottom="@dimen/padding_input_left_right"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Profile" />
+
+                    <EditText
+                        android:id="@+id/txtUsername"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_splash_screen"
+                        android:paddingLeft="@dimen/padding_input_left_right"
+                        android:hint="Username"
+                        android:inputType="textNoSuggestions"
+                        android:drawableLeft="@drawable/ic_accessibility_black_24dp"
+                        android:drawablePadding="12dp" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/txtPass"
+                            android:layout_width="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_splash_screen"
+                            android:paddingLeft="@dimen/padding_input_left_right"
+                            android:hint="Password"
+                            android:inputType="textPassword"
+                            android:drawableLeft="@drawable/ic_lock_open_black_24dp"
+                            android:drawablePadding="12dp"/>
+
+                        <ImageView
+                            android:id="@+id/btnshowpass"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="5dp"
+                            android:src="@drawable/ic_remove_red_eye_black_24dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <EditText
+                        android:id="@+id/txtPass2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_splash_screen"
+                        android:paddingLeft="@dimen/padding_input_left_right"
+                        android:hint="Confirm Password"
+                        android:inputType="textPassword"
+                        android:drawableLeft="@drawable/ic_lock_open_black_24dp"
+                        android:drawablePadding="12dp"/>
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="WiFi" />
+
+                    <EditText
+                        android:id="@+id/txtSSID"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_home_black_24dp"
+                        android:drawablePadding="12dp"
+                        android:hint="WiFi SSID"
+                        android:inputType="textNoSuggestions"
+                        android:paddingLeft="@dimen/padding_input_left_right"
+                        android:textSize="@dimen/font_splash_screen" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/txtWiFiPass"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableLeft="@drawable/ic_lock_open_black_24dp"
+                            android:drawablePadding="12dp"
+                            android:hint="WiFi Password"
+                            android:inputType="textPassword"
+                            android:paddingLeft="@dimen/padding_input_left_right"
+                            android:textSize="@dimen/font_splash_screen" />
+
+                        <ImageView
+                            android:id="@+id/btnshowpasswifi"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="5dp"
+                            android:src="@drawable/ic_remove_red_eye_black_24dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+
+                    <Button
+                        android:id="@+id/btnSimpan"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Submit"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingLeft="30dp"
+                        android:paddingRight="30dp"
+                        android:textColor="@color/colorWhite"
+                        android:background="@color/colorPrimary" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+    </ScrollView>
+</LinearLayout>
