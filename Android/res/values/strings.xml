@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Wireless Relay</string>
+    <string-array name="tab">
+        <item>Group</item>
+        <item>Schedule</item>
+        <item>Profile</item>
+    </string-array>
+    <string-array name="arrDevices">
+        <item>Device 1</item>
+        <item>Device 2</item>
+        <item>Device 3</item>
+        <item>Device 4</item>
+    </string-array>
+    <string-array name="arrGroup">
+        <item>Ruang Tamu</item>
+        <item>Ruang Makan</item>
+        <item>Kamar Tidur 1</item>
+        <item>Kamar Tidur 2</item>
+    </string-array>
+
+    <string name="bahasa_prompt">Choose Language</string>
+    <string-array name="bahasa">
+        <item>English</item>
+        <item>Indonesia</item>
+    </string-array>
+
+    <string name="theme_prompt">Choose Theme</string>
+    <string-array name="theme">
+        <item>White</item>
+        <item>Black</item>
+    </string-array>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="slogan">Kesombongan Adalah Awal Dari Kejayaan</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main">Wire</string>
+</resources>

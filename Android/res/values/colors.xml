@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimary">#3F51B5</color>-->
+    <!--<color name="colorPrimaryDark">#303F9F</color>-->
+    <!--<color name="colorAccent">#FF4081</color>-->
+    <color name="colorButtonPejet">#C71585</color>
+
+    <color name="colorPrimary1">#313131</color>
+    <color name="colorHijau">#00923f</color>
+    <color name="colorAccent1">#045929</color>
+    <color name="colorShadow">#7f000000</color>
+    <color name="colorBlack">#030303</color>
+    <color name="colorPrimaryDark1">#303F9F</color>
+    <color name="colorBackground">#99ddff</color>
+    <color name="colorFont">#212121</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorRed">#F22613</color>
+
+    <color name="colorLinkGrey">#D3D3D3</color>
+    <color name="colorGrey">#ABB7B7</color>
+    <color name="colorGreyDark">#6C7A89</color>
+
+    <color name="colorFAB1">#2196F3</color>
+    <color name="colorFAB2">#E040FB</color>
+    <color name="colorFAB3">#9234F3</color>
+
+    <color name="colorBg">#fafafa</color>
+
+    <!--<color name="colorPrimary">#F50057</color>-->
+    <color name="colorPrimary">#6C7A89</color>
+    <color name="colorPrimaryDark">#6C7A89</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="viewBg">#f1f5f8</color>
+    <color name="album_title">#4c4c4c</color>
+</resources>
