@@ -21,7 +21,7 @@ if(strlen($exec['block']) > 0){
                     
             $eid = $cbc->encrypt($exec['id']);
             
-            echo $eid;
+            echo htmlspecialchars($eid);
         }
         else{
             echo $GLOBALS['error']['id_use'];

@@ -24,7 +24,7 @@ if(isset($exec['ssid'])){
 	$ssid_key = generateSSIDKey($mac);
 	$essid = base64_encode(XOR_Encrypt(MD5_HMAC($ssid, $GLOBALS['crypto']['xor_mac_key'], $ssid_key).$ssid, $ssid_key));
 
-	echo $essid;
+	echo htmlspecialchars($essid);
 }
 else{
 	echo 0;

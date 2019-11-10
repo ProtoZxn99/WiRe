@@ -19,6 +19,6 @@ while($row = mysqli_fetch_array($query)){
 	array_push($result, array('id'=> $row['id'], 'name'=> $row['name'], 'email'=> $ecb->decrypt($row['email']), 'state'=> $status));
 }
 
-echo json_encode(array("result"=>$result));
+echo htmlspecialchars(json_encode(array("result"=>$result)));
 
 include '_footer.php';

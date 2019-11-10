@@ -13,4 +13,4 @@ $prosentase = ($jmlnyala / $jml)*100;
 
 $result = array();
 array_push($result, array('prosentase'=>$prosentase));
-echo json_encode(array("result"=>$result));
+echo htmlspecialchars(json_encode(array("result"=>$result)));

@@ -8,7 +8,7 @@ $hmac_id = substr($device_id, 0, 32);
 $device_id = substr($device_id, 32);
 
 if(MD5_HMAC($device_id, $GLOBALS['crypto']['xor_mac_key'], $GLOBALS['crypto']['xor_mac_key'])!==$hmac_id){
-    echo $hmac_id;
+    echo htmlspecialchars($hmac_id);
     include '_footer.php';
 }
 
@@ -18,7 +18,7 @@ $exec = mysqli_fetch_array($query);
 if(!is_null($exec['state'])){
     $state = $exec['state']. RandomString(5);
     $state = base64_encode(XOR_Encrypt(MD5_HMAC($state, $GLOBALS['crypto']['xor_mac_key'], $device_id).$state,$device_id));
-    echo $state;
+    echo htmlspecialchars($state);
 }
 else{
     echo -1;

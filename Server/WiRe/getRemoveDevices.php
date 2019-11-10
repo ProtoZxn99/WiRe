@@ -7,6 +7,6 @@ $query = mysqli_query($conn, "select a.grouping_id, b.device_id ,b.device_name f
 while($row = mysqli_fetch_array($query)){
 	array_push($result, array('grouping_id'=> $row['grouping_id'], 'device_id'=>$row['device_id'], 'device_name'=>$row['device_name']));
 }
-echo json_encode(array("result"=>$result));
+echo htmlspecialchars(json_encode(array("result"=>$result)));
 
 include '_footer.php';

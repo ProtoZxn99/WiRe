@@ -20,4 +20,4 @@ array_push($result, array('id'=> $data['timer_id'],
 	'timer_d6'=> $data['timer_d6']
 ));
 
-echo json_encode(array("result"=>$result));
+echo htmlspecialchars(json_encode(array("result"=>$result)));

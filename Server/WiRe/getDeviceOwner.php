@@ -7,7 +7,7 @@ $query = mysqli_query($conn, "SELECT account_id as id from device where device_i
 $exec = mysqli_fetch_array($query);
 
 if(!is_null($exec['user'])){
-    echo $exec['user'];
+    echo htmlspecialchars($exec['user']);
 }
 else{
     echo -1;

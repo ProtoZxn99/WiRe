@@ -20,7 +20,7 @@ if($result['total']<1){
     $check =  mysqli_query($conn, "select grouping_id as id from grouping where account_id='".$account_id."' and grouping_name='".$grouping_name."';");
     $result = mysqli_fetch_array($check);
     
-	echo $result['id'];
+	echo htmlspecialchars($result['id']);
 }
 else{
     echo $GLOBALS['error']["group_duplicate"];

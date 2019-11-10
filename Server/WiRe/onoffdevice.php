@@ -11,4 +11,4 @@ if($update == 1){
 }else{
 	array_push($result, array('status'=>"Device not changed"));
 }
-echo json_encode(array("result"=>$result));
+echo htmlspecialchars(json_encode(array("result"=>$result)));

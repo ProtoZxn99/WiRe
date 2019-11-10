@@ -21,7 +21,7 @@ if(isset($exec['password'])){
 	$password = $ecb->decrypt($exec['password']);
 	$epassword = base64_encode(XOR_Encrypt(MD5_HMAC($password, $GLOBALS['crypto']['xor_mac_key'], $ssid).$password, $ssid));
 
-	echo $epassword;
+	echo htmlspecialchars($epassword);
 }
 else{
 	echo -1;

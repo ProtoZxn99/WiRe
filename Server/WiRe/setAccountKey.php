@@ -24,7 +24,7 @@ ValidateUser($conn, $account_id, $account_password);
 
 //echo "1234567890123456";
 
-echo DiffieHellman_Count($conn, $account_key, $account_id);
+echo htmlspecialchars(DiffieHellman_Count($conn, $account_key, $account_id));
 
 include '_footer.php';
 

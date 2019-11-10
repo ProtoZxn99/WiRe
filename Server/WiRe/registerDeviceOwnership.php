@@ -15,11 +15,16 @@ $device_id = $cbc->decrypt($device_id);
 $device_name = $cbc->decrypt($device_name);
 
 $ecb = new AES_128_ECB($GLOBALS['crypto']['device_aes']);
-
+echo $device_id;die();
 $device_id = $ecb->decrypt($device_id);
 
-$query = mysqli_query($conn, "update device set account_id = '".$account_id."', device_name = '".$device_name."' where device_id = '".$device_id."';");
-
-echo $query;
-
+$query_check = mysqli_query($conn, "select count(*) as c from device where device_id = '".$device_id."' and account_id is NULL;");
+$c = mysqli_fetch_array($query_check);
+if($c['c']>0){
+	$query = mysqli_query($conn, "update device set account_id = '".$account_id."', device_name = '".$device_name."' where device_id = '".$device_id."';");
+	echo $query;
+}
+else{
+	echo $GLOBALS['error']["device_duplicate"];
+}
 include '_footer.php';

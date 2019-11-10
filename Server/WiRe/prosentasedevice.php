@@ -12,4 +12,4 @@ $p = ($on / $total)*100;
 
 $result = array();
 array_push($result, array('p'=>$p));
-echo json_encode(array("result"=>$result));
+echo htmlspecialchars(json_encode(array("result"=>$result)));
