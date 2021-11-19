@@ -4,8 +4,8 @@
 #include <MD5.h>
 
 // Replace these with your WiFi network settings
-static String ssid = "cd4687"; //replace this with your WiFi network name
-static String password = "278019560"; //replace this with your WiFi network password
+static String ssid = "network"; //replace this with your WiFi network name
+static String password = "password"; //replace this with your WiFi network password
 
 //Server link
 static const String server_url = "http://192.168.0.25/wire/";
